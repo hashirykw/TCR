@@ -12,6 +12,7 @@ assets/css/style.css    design tokens + all styles
 assets/js/data.js       syllabus library, timetable, June 2026 thresholds  ← edit content here
 assets/js/main.js       interactions (preloader, themes, explorer, booking, chat, scroll scenes)
 assets/js/gl.js         WebGL crest particles
+tools/bump.mjs          stamps ?v=<hash> on CSS/JS links (run after edits)
 assets/js/vendor/       Lenis 1.3, GSAP 3.15 + ScrollTrigger
 assets/fonts/           Fraunces, Hanken Grotesk, JetBrains Mono (variable woff2)
 assets/img/             crest, favicons, Nexlyr mark
@@ -29,6 +30,10 @@ vercel.json             long-term caching for /assets
 - **⌘K search** across sections, syllabus codes and teachers; `/` focuses the syllabus search.
 - **Side admissions card** (slides in once, dismiss remembered for 3 days) and a results countdown bar.
 - Mobile: full-width bottom action bar, small dropdown menu, bottom-sheet pop-ups.
+
+## Caching (important)
+
+CSS and JS are referenced as `style.css?v=<hash>`. **After editing any CSS or JS, run `node tools/bump.mjs`** before committing, so every visitor gets the new file immediately. `vercel.json` also makes CSS/JS revalidate on each visit as a safety net; fonts are cached for a year.
 
 ## Updating content
 

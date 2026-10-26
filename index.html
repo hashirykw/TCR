@@ -15,7 +15,8 @@
 <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/img/crest.webp" as="image">
-<link rel="stylesheet" href="assets/css/style.css">
+<style>.ldx,.loader{display:none}html.ld-on .ldx{display:contents}svg.i{width:18px;height:18px;fill:none;stroke:currentColor}[hidden]{display:none!important}body{margin:0;background:#fdfbf8;color:#1b2033}[data-theme=dark] body{background:#0b0f1c;color:#f6f3ee}img{max-width:100%;height:auto}</style>
+<link rel="stylesheet" href="assets/css/style.css?v=7a86c62a">
 <script>(function(){var d=document.documentElement,t="light";try{t=localStorage.getItem("tcr-theme")||"light"}catch(e){}d.dataset.theme=t;try{if(!sessionStorage.getItem("tcr-seen")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("ld-on")}catch(e){}})();</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"EducationalOrganization","name":"The Classroom (TCR)","alternateName":"The Classroom North Nazimabad","url":"https://www.theclassroom.pk","logo":"https://www.theclassroom.pk/assets/img/crest-full.webp","email":"info@theclassroom.pk","telephone":"+92 311 1111827","address":{"@type":"PostalAddress","streetAddress":"Plot C-22, Block I, North Nazimabad","addressLocality":"Karachi","postalCode":"74700","addressCountry":"PK"},"geo":{"@type":"GeoCoordinates","latitude":24.9441,"longitude":67.0463},"slogan":"Ad Altiora Tendo"}
@@ -57,6 +58,11 @@
   <div class="ldx-m ldx-br">Ad Altiora Tendo</div>
 </div>
 <div class="progress" aria-hidden="true"><i></i></div>
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop__aura"><i></i><i></i><i></i></div>
+  <div class="backdrop__floor"></div>
+  <div class="backdrop__grain"></div>
+</div>
 <canvas id="gl" aria-hidden="true"></canvas>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -184,7 +190,7 @@
 </section>
 
 <!-- ============ WHY (bento) ============ -->
-<section class="why wrap" aria-labelledby="whyTitle">
+<section class="why wrap slab" aria-labelledby="whyTitle">
   <div class="sec-head">
     <h2 class="h2" id="whyTitle">Built around the<br>Cambridge year.</h2>
     <p class="lede">Every number here comes from the published timetable and Cambridge syllabus list, not a marketing deck.</p>
@@ -265,7 +271,7 @@
 </section>
 
 <!-- ============ SYLLABUS EXPLORER ============ -->
-<section class="syllabus wrap" id="syllabus">
+<section class="syllabus wrap slab" id="syllabus">
   <div class="sec-head">
     <h2 class="h2">Every paper,<br>every topic.</h2>
     <p class="lede">The official Cambridge syllabus for each subject we teach, in the version that applies to the 2027 exams. Open a code to see its papers and topics.</p>
@@ -294,7 +300,7 @@
 </section>
 
 <!-- ============ PAPER: GRADES (calculator + thresholds) ============ -->
-<section class="grades invert" id="grades">
+<section class="grades always-dark" id="grades">
   <div class="band-in">
     <div class="wrap">
       <div class="sec-head">
@@ -344,7 +350,7 @@
 </section>
 
 <!-- ============ TIMETABLE ============ -->
-<section class="tt wrap" id="timetable">
+<section class="tt wrap slab" id="timetable">
   <div class="sec-head">
     <h2 class="h2">Find your class.</h2>
     <p class="lede">Pick your level and the days that suit you. Seats are allotted per room, so reserve before you come in.</p>
@@ -369,9 +375,9 @@
 </section>
 
 <!-- ============ PAPER: FACULTY ============ -->
-<section class="faculty tint" id="faculty">
+<section class="faculty" id="faculty">
   <div class="band-in">
-    <div class="wrap">
+    <div class="wrap slab">
       <div class="sec-head">
         <h2 class="h2">The people behind<br>the grades.</h2>
         <p class="lede">Heads of department and subject specialists who teach O Level, AS and A2 under one roof.</p>
@@ -395,7 +401,7 @@
 </section>
 
 <!-- ============ CALENDAR + COUNTDOWN ============ -->
-<section class="cal wrap" id="calendar">
+<section class="cal wrap slab" id="calendar">
   <div class="cal__head">
     <div>
       <h2 class="h2">The year ahead.</h2>
@@ -426,7 +432,7 @@
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="faq-sec tint" id="faq"><div class="faq wrap">
+<section class="faq-sec" id="faq"><div class="faq wrap slab">
   <div class="faq__side">
     <h2 class="h2">Questions parents ask.</h2>
     <p class="lede">Anything else, the front desk answers on WhatsApp during class hours.</p>
@@ -443,7 +449,7 @@
 </div></section>
 
 <!-- ============ VISIT ============ -->
-<section class="visit wrap" id="visit">
+<section class="visit wrap slab" id="visit">
   <div class="visit__grid">
     <div class="visit__copy">
       <h2 class="h2">Come see a class.</h2>
@@ -634,11 +640,11 @@
 
 <div class="cursor" aria-hidden="true"><i></i><b class="cursor__label"></b></div>
 
-<script src="assets/js/vendor/lenis.min.js" defer></script>
-<script src="assets/js/vendor/gsap.min.js" defer></script>
-<script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/js/data.js" defer></script>
-<script src="assets/js/gl.js" defer></script>
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/vendor/lenis.min.js?v=acddbf76" defer></script>
+<script src="assets/js/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="assets/js/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="assets/js/data.js?v=3834400b" defer></script>
+<script src="assets/js/gl.js?v=15057569" defer></script>
+<script src="assets/js/main.js?v=0993c762" defer></script>
 </body>
 </html>

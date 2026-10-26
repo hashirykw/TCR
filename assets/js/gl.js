@@ -156,7 +156,8 @@ void main(){
   function setMode(m, p) { mode = m; if (p) place = Object.assign({}, place, p); }
 
   /* pointer drag-to-rotate (gentle) */
-  let px = 0, py = 0, rx = 0, ry = 0;
+  let px = 0, py = 0, rx = 0, ry = 0, sy = 0, sv = 0, lastDraw = 0;
+  addEventListener('scroll', () => { sy = scrollY; }, { passive: true });
   addEventListener('pointermove', e => { px = e.clientX / innerWidth - .5; py = e.clientY / innerHeight - .5; }, { passive: true });
 
   let W = 0, H = 0, dpr = 1;
@@ -175,6 +176,9 @@ void main(){
 
   function frame(now) {
     if (!visible) return;
+    // outside the hero the field is ambient: 30 fps is plenty and saves the GPU for the glass
+    if (mode !== 'hero' && now - lastDraw < 32) { requestAnimationFrame(frame); return; }
+    lastDraw = now;
     t = Math.min(1, (now - tStart) / morph);
     // target placement
     let tx, ty, unit, ta;
@@ -193,13 +197,15 @@ void main(){
     // rotation: slow spin + pointer lean
     const time = reduce ? 0 : (now - t0) / 1000;
     rx += (py * .5 - rx) * .05; ry += (px * .8 - ry) * .05;
-    const a = time * .22 + ry, b = rx;
+    sv += (sy * .0011 - sv) * .08;
+    const a = time * .22 + ry + sv, b = rx + Math.sin(sv * .6) * .18;
     const ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b);
     // R = Rx(b) * Ry(a), column-major
     gl.uniformMatrix3fv(u.R, false, [ca, sa * sb, -sa * cb, 0, cb, sb, sa, -ca * sb, ca * cb]);
     gl.uniform1f(u.T, t); gl.uniform1f(u.time, time);
     gl.uniform2f(u.scale, cur.sx, cur.sy); gl.uniform2f(u.off, cur.x, cur.y);
-    gl.uniform1f(u.size, small ? 2.6 : 2.9); gl.uniform1f(u.alpha, cur.alpha * (additive ? .75 : .9));
+    cur.size = (cur.size || 2.9) + (((mode === 'hero') ? (small ? 2.6 : 2.9) : (small ? 3.6 : 4.6)) - (cur.size || 2.9)) * .06;
+    gl.uniform1f(u.size, cur.size); gl.uniform1f(u.alpha, cur.alpha * (additive ? .75 : .9));
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.POINTS, 0, N);
     requestAnimationFrame(frame);

@@ -133,7 +133,7 @@
   /* ================= NAV ================= */
   const nav = $('#nav'); let lastY = 0;
   const railEl = $('.rail'), railFill = $('.rail__fill'), railMarks = $$('.rail span');
-  const prog = $('.progress i'), topBtn = $('.dock__top');
+  const prog = $('.progress i'), topBtn = $('.dock__top'), floor = $('.backdrop__floor');
   const onScroll = () => {
     const y = window.scrollY, max = document.documentElement.scrollHeight - innerHeight, p = max > 0 ? Math.min(1, y / max) : 0;
     nav.classList.toggle('is-scrolled', y > 30);
@@ -141,6 +141,7 @@
     if (y < lastY - 4) nav.classList.remove('is-hidden');
     lastY = y;
     prog.style.transform = `scaleX(${p})`;
+    floor && floor.style.setProperty('--floor', (y * .35 % 80).toFixed(1) + 'px');
     railEl.classList.toggle('show', y > innerHeight * .6);
     railFill.style.setProperty('--p', p.toFixed(3));
     railMarks.forEach((m, i) => m.classList.toggle('on', p >= i / (railMarks.length - 1) - .02));
@@ -541,6 +542,7 @@
     document.addEventListener('pointerleave', () => cur.classList.add('is-out'));
     (function loop() { cx += (tx - cx) * .3; cy += (ty - cy) * .3; cur.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); })();
 
+    grid.addEventListener('pointermove', e => { const c = e.target.closest('.syl'); if (!c) return; const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }, { passive: true });
     if (G) {
       $$('.tile, .prog, .fac').forEach(c => {
         G.set(c, { transformPerspective: 1000 });
@@ -615,10 +617,18 @@
     if (window.TCRGL) {
       const place = (sel, shape, p) => ST.create({ trigger: sel, start: 'top 60%', end: 'bottom 40%', onToggle: s => { if (s.isActive) { inHero = false; TCRGL.setMode('free', p); showShape(shape); } } });
       ST.create({ trigger: '.hero', start: 'top top', end: 'bottom 30%', onToggle: s => { if (s.isActive) { inHero = true; TCRGL.setMode('hero'); } } });
-      place('.programs', 'cap', { x: .5, y: .5, scale: .6, alpha: .7 });
-      place('.syllabus', 'book', { x: .6, y: .25, scale: .62, alpha: .16 });
-      place('.cal', 'globe', { x: .62, y: .3, scale: .55, alpha: .2 });
-      ['.why', '.grades', '.tt', '.faculty', '.faq-sec', '.visit', '.band', '.foot'].forEach(sel => ST.create({ trigger: sel, start: 'top 60%', end: 'bottom 40%', onToggle: s => { if (s.isActive) { inHero = false; TCRGL.setMode('free', { alpha: 0 }); } } }));
+      // the crest's quarters live behind every section, alternating sides
+      place('.why', 'globe', { x: .66, y: .1, scale: .95, alpha: .5 });
+      place('.programs', 'cap', { x: .5, y: .1, scale: .95, alpha: .75 });
+      place('.syllabus', 'book', { x: -.62, y: .2, scale: .9, alpha: .55 });
+      place('.grades', 'atom', { x: .7, y: .35, scale: .9, alpha: .55 });
+      place('.tt', 'globe', { x: -.7, y: -.1, scale: .85, alpha: .45 });
+      place('.faculty', 'cap', { x: .7, y: .15, scale: .85, alpha: .5 });
+      place('.cal', 'atom', { x: -.66, y: .25, scale: .9, alpha: .5 });
+      place('.faq-sec', 'book', { x: .68, y: -.05, scale: .85, alpha: .5 });
+      place('.visit', 'globe', { x: -.62, y: .1, scale: .9, alpha: .5 });
+      place('.band', 'cap', { x: .62, y: 0, scale: 1, alpha: .55 });
+      place('.foot', 'atom', { x: 0, y: .4, scale: .8, alpha: .4 });
     }
     ST.refresh();
   }
