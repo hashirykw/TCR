@@ -542,6 +542,14 @@
     document.addEventListener('pointerleave', () => cur.classList.add('is-out'));
     (function loop() { cx += (tx - cx) * .3; cy += (ty - cy) * .3; cur.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); })();
 
+    $$('.slab').forEach(sl => sl.addEventListener('pointermove', e => { const r = sl.getBoundingClientRect(); sl.style.setProperty('--sx', (e.clientX - r.left) + 'px'); sl.style.setProperty('--sy', (e.clientY - r.top) + 'px'); }, { passive: true }));
+    // magnetic primary buttons
+    $$('.btn--primary.btn--lg, .dock__ask, .band .btn--light').forEach(b => {
+      const mx = G ? G.quickTo(b, 'x', { duration: .5, ease: 'power3.out' }) : null, my = G ? G.quickTo(b, 'y', { duration: .5, ease: 'power3.out' }) : null;
+      if (!mx) return;
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); mx((e.clientX - r.left - r.width / 2) * .25); my((e.clientY - r.top - r.height / 2) * .35); });
+      b.addEventListener('pointerleave', () => { mx(0); my(0); });
+    });
     grid.addEventListener('pointermove', e => { const c = e.target.closest('.syl'); if (!c) return; const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }, { passive: true });
     if (G) {
       $$('.tile, .prog, .fac').forEach(c => {
@@ -598,6 +606,10 @@
     // hero parallax
     G.to('.hero__glow--a', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     G.to('.hero__copy', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    // slabs lift off the 3D floor: tilted back in perspective, flattening as they arrive
+    $$('.slab, .grades .band-in').forEach(el => {
+      G.fromTo(el, { rotationX: 9, y: 70, scale: .965, transformPerspective: 1400 }, { rotationX: 0, y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 62%', scrub: .8 } });
+    });
     // pinned horizontal programs (desktop)
     const mm = G.matchMedia();
     mm.add('(min-width: 901px)', () => {
@@ -611,7 +623,7 @@
     const fm = $('.foot__mark');
     ST.create({ trigger: fm, start: 'top bottom', end: 'bottom 75%', scrub: true, onUpdate: s => fm.style.setProperty('--fp', s.progress.toFixed(3)) });
     // inverted bands ease in
-    $$('.grades .band-in, .band__in').forEach(b => G.from(b, { scale: .96, borderRadius: 48, ease: 'none', scrollTrigger: { trigger: b, start: 'top bottom', end: 'top 55%', scrub: true } }));
+    G.from('.band__in', { scale: .96, ease: 'none', scrollTrigger: { trigger: '.band__in', start: 'top bottom', end: 'top 55%', scrub: true } });
 
     // 3D particles: where they live as you scroll
     if (window.TCRGL) {

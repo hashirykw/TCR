@@ -123,18 +123,77 @@ void main(){
   gl.useProgram(prog);
   const A = new Float32Array(SHAPES.atom), B = new Float32Array(SHAPES.atom);
   const S = new Float32Array(N); for (let i = 0; i < N; i++) S[i] = rnd();
-  const buf = (data, name, size, usage) => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, usage); const l = gl.getAttribLocation(prog, name); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, size, gl.FLOAT, false, 0, 0); return b; };
-  const bA = buf(A, 'aA', 3, gl.DYNAMIC_DRAW), bB = buf(B, 'aB', 3, gl.DYNAMIC_DRAW); buf(S, 'aS', 1, gl.STATIC_DRAW);
+  const mk = (data, usage) => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, usage); return b; };
+  const bA = mk(A, gl.DYNAMIC_DRAW), bB = mk(B, gl.DYNAMIC_DRAW), bS = mk(S, gl.STATIC_DRAW);
+  const LA = gl.getAttribLocation(prog, 'aA'), LB = gl.getAttribLocation(prog, 'aB'), LS = gl.getAttribLocation(prog, 'aS');
+  const bind = (b, l, size) => { gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, size, gl.FLOAT, false, 0, 0); };
   const U = n => gl.getUniformLocation(prog, n);
   const u = { T: U('uT'), time: U('uTime'), size: U('uSize'), dpr: U('uDpr'), scale: U('uScale'), off: U('uOff'), R: U('uR'), CA: U('uCA'), CB: U('uCB'), alpha: U('uAlpha') };
   gl.disable(gl.DEPTH_TEST); gl.enable(gl.BLEND);
+
+  /* ---------- second layer: deep dust + giant orbit rings, the whole page ---------- */
+  const ND = small ? 520 : 1100, NR = small ? 1400 : 2700;
+  const dP = new Float32Array((ND + NR) * 3), dK = new Float32Array(ND + NR);
+  for (let i = 0; i < ND; i++) { dP.set([(rnd() * 2 - 1) * 1.15, (rnd() * 2 - 1) * 1.6, rnd()], i * 3); dK[i] = rnd() * .5; } // k<.5 = dust
+  for (let i = 0; i < NR; i++) { // three tilted rings, k encodes which ring (>=.5)
+    const ring = i % 3, u = rnd() * TAU, rr = [1.25, 1.6, 2.0][ring];
+    dP.set([Math.cos(u) * rr, Math.sin(u) * rr * .34, (rnd() - .5) * .02], (ND + i) * 3); dK[ND + i] = .5 + ring * .2 + rnd() * .05;
+  }
+  const dvs = `
+attribute vec3 aP; attribute float aK;
+uniform float uTime, uScroll, uAsp, uDpr, uSize; uniform vec2 uLean;
+varying float vA; varying float vK;
+void main(){
+  vec2 p; float sz; float a;
+  if (aK < .5) {
+    float depth = aP.z;                              // 0 far .. 1 near
+    float y = aP.y + uScroll * (0.25 + depth * 1.1); // parallax: near dust moves faster
+    y = mod(y + 1.6, 3.2) - 1.6;
+    float x = aP.x + sin(uTime * .12 + aK * 60.) * .03 + uLean.x * depth * .08;
+    p = vec2(x, y + uLean.y * depth * .06);
+    sz = (1.2 + depth * 2.6); a = .25 + depth * .55;
+  } else {
+    float ring = floor((aK - .5) / .2);
+    float ang = uTime * (0.025 + ring * .012) * (mod(ring, 2.) > .5 ? -1. : 1.) + uScroll * (.35 + ring * .15);
+    float tilt = .45 + ring * .5;
+    vec3 q = aP;
+    float c = cos(ang), s = sin(ang);
+    q.xy = vec2(q.x * c - q.y * s, q.x * s + q.y * c);   // spin within plane
+    float ct = cos(tilt), st = sin(tilt);
+    q = vec3(q.x, q.y * ct - q.z * st, q.y * st + q.z * ct); // tilt into depth
+    float k = 1. / (1. - q.z * .35);
+    p = vec2(q.x * k + .35, q.y * k * .9 - .05 - uScroll * .08) + uLean * .03;
+    sz = 2.3 * k; a = .75 * clamp(.55 + q.z, .25, 1.);
+  }
+  gl_Position = vec4(p.x / uAsp, p.y, 0., 1.);
+  gl_PointSize = sz * uSize * uDpr; vA = a; vK = aK;
+}`;
+  const dfs = `
+precision mediump float;
+uniform vec3 uCA, uCB; uniform float uAlpha;
+varying float vA; varying float vK;
+void main(){
+  float d = length(gl_PointCoord - .5); if (d > .5) discard;
+  float a = smoothstep(.5, .05, d) * vA * uAlpha;
+  vec3 col = vK < .5 ? mix(uCA, uCB, step(.42, vK)) : uCA;
+  gl_FragColor = vec4(col * a, a);
+}`;
+  const dprog = gl.createProgram();
+  gl.attachShader(dprog, sh(gl.VERTEX_SHADER, dvs)); gl.attachShader(dprog, sh(gl.FRAGMENT_SHADER, dfs)); gl.linkProgram(dprog);
+  const dOK = gl.getProgramParameter(dprog, gl.LINK_STATUS);
+  const bDP = mk(dP, gl.STATIC_DRAW), bDK = mk(dK, gl.STATIC_DRAW);
+  const DLP = gl.getAttribLocation(dprog, 'aP'), DLK = gl.getAttribLocation(dprog, 'aK');
+  const DU = n => gl.getUniformLocation(dprog, n);
+  const du = { time: DU('uTime'), scroll: DU('uScroll'), asp: DU('uAsp'), dpr: DU('uDpr'), size: DU('uSize'), lean: DU('uLean'), CA: DU('uCA'), CB: DU('uCB'), alpha: DU('uAlpha') };
+  let dCol = [[.78, .12, .16], [.74, .5, .14]];
 
   /* ---------- theme ---------- */
   let additive = false;
   function setTheme(t) {
     additive = t === 'dark';
-    if (additive) { gl.uniform3f(u.CA, .93, .28, .3); gl.uniform3f(u.CB, 1, .8, .45); gl.blendFunc(gl.ONE, gl.ONE); }
-    else { gl.uniform3f(u.CA, .78, .12, .16); gl.uniform3f(u.CB, .74, .5, .14); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); }
+    gl.useProgram(prog);
+    if (additive) { gl.uniform3f(u.CA, .93, .28, .3); gl.uniform3f(u.CB, 1, .8, .45); gl.blendFunc(gl.ONE, gl.ONE); dCol = [[.9, .3, .32], [1, .78, .45]]; }
+    else { gl.uniform3f(u.CA, .78, .12, .16); gl.uniform3f(u.CB, .74, .5, .14); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); dCol = [[.8, .16, .2], [.76, .52, .16]]; }
   }
   setTheme(document.documentElement.dataset.theme);
 
@@ -165,7 +224,7 @@ void main(){
     dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 1.75);
     W = innerWidth; H = innerHeight;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    gl.viewport(0, 0, canvas.width, canvas.height); gl.uniform1f(u.dpr, dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height); gl.useProgram(prog); gl.uniform1f(u.dpr, dpr);
   }
   resize(); addEventListener('resize', resize);
 
@@ -177,7 +236,8 @@ void main(){
   function frame(now) {
     if (!visible) return;
     // outside the hero the field is ambient: 30 fps is plenty and saves the GPU for the glass
-    if (mode !== 'hero' && now - lastDraw < 32) { requestAnimationFrame(frame); return; }
+    const moving = Math.abs(sy - (frame.lsy || 0)) > .5; frame.lsy = sy;
+    if (mode !== 'hero' && !moving && now - lastDraw < 32) { requestAnimationFrame(frame); return; }
     lastDraw = now;
     t = Math.min(1, (now - tStart) / morph);
     // target placement
@@ -193,9 +253,21 @@ void main(){
     cur.x += (tx - cur.x) * k; cur.y += (ty - cur.y) * k;
     cur.sx += (unit / (W / 2) - cur.sx) * k; cur.sy += (unit / (H / 2) - cur.sy) * k;
     cur.alpha += (ta - cur.alpha) * .06;
-    if (cur.alpha < .004) { gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); requestAnimationFrame(frame); return; }
-    // rotation: slow spin + pointer lean
     const time = reduce ? 0 : (now - t0) / 1000;
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    // layer 1: dust + orbit rings across the whole page
+    if (dOK) {
+      gl.useProgram(dprog); gl.disableVertexAttribArray(LS);
+      bind(bDP, DLP, 3); bind(bDK, DLK, 1);
+      const max = Math.max(1, document.documentElement.scrollHeight - H);
+      gl.uniform1f(du.time, time); gl.uniform1f(du.scroll, sy / max * 3.2); gl.uniform1f(du.asp, W / H);
+      gl.uniform1f(du.dpr, dpr); gl.uniform1f(du.size, small ? .9 : 1); gl.uniform2f(du.lean, px, -py);
+      gl.uniform3f(du.CA, ...dCol[0]); gl.uniform3f(du.CB, ...dCol[1]); gl.uniform1f(du.alpha, additive ? .5 : .55);
+      gl.drawArrays(gl.POINTS, 0, ND + NR);
+    }
+    if (cur.alpha < .004) { requestAnimationFrame(frame); return; }
+    // layer 2: the crest shape
+    gl.useProgram(prog); bind(bA, LA, 3); bind(bB, LB, 3); bind(bS, LS, 1);
     rx += (py * .5 - rx) * .05; ry += (px * .8 - ry) * .05;
     sv += (sy * .0011 - sv) * .08;
     const a = time * .22 + ry + sv, b = rx + Math.sin(sv * .6) * .18;
@@ -206,7 +278,6 @@ void main(){
     gl.uniform2f(u.scale, cur.sx, cur.sy); gl.uniform2f(u.off, cur.x, cur.y);
     cur.size = (cur.size || 2.9) + (((mode === 'hero') ? (small ? 2.6 : 2.9) : (small ? 3.6 : 4.6)) - (cur.size || 2.9)) * .06;
     gl.uniform1f(u.size, cur.size); gl.uniform1f(u.alpha, cur.alpha * (additive ? .75 : .9));
-    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.POINTS, 0, N);
     requestAnimationFrame(frame);
   }
