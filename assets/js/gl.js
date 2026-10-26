@@ -2,7 +2,8 @@
    A hand-written WebGL point field (no three.js) that morphs between the four
    quarters of the crest: atom, globe, open book and graduation cap.
    Exposes window.TCRGL = { setMode, setShape, setTheme, shapes } */
-(() => {
+window.TCRGLBoot = () => {
+  if (window.TCRGL) return;
   const canvas = document.getElementById('gl');
   if (!canvas) return;
   const gl = canvas.getContext('webgl', { antialias: false, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
@@ -221,7 +222,7 @@ void main(){
 
   let W = 0, H = 0, dpr = 1;
   function resize() {
-    dpr = Math.min(devicePixelRatio || 1, small ? 1.5 : 1.75);
+    dpr = Math.min(devicePixelRatio || 1, small ? 1.25 : 1.35);
     W = innerWidth; H = innerHeight;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     gl.viewport(0, 0, canvas.width, canvas.height); gl.useProgram(prog); gl.uniform1f(u.dpr, dpr);
@@ -284,4 +285,4 @@ void main(){
   requestAnimationFrame(frame);
 
   window.TCRGL = { setMode, setShape, setTheme, shapes: Object.keys(SHAPES) };
-})();
+};

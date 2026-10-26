@@ -35,6 +35,19 @@ vercel.json             long-term caching for /assets
 
 CSS and JS are referenced as `style.css?v=<hash>`. **After editing any CSS or JS, run `node tools/bump.mjs`** before committing, so every visitor gets the new file immediately. `vercel.json` also makes CSS/JS revalidate on each visit as a safety net; fonts are cached for a year.
 
+## Performance budget
+
+Measured on a Brotli server (what Vercel serves), Chromium, 4G (9 Mbps, 60 ms):
+
+| Visit | Device | First paint | Usable |
+|---|---|---|---|
+| First (with intro) | desktop | 0.45 s | 1.7 s |
+| First (with intro) | slow phone (4x CPU) | 0.56 s | 1.9 s |
+| Repeat | desktop | 0.43 s | 0.43 s |
+| Repeat | slow phone | 0.53 s | 0.6 s |
+
+Total transfer ≈ 238 KB. Fonts are subset and axis-trimmed (`fraunces` 300–800 wght / 36–144 opsz, `hanken-grotesk` and `jetbrains-mono` 400–700). The 3D engine and scroll scenes start only after the intro lands, so the first seconds stay smooth. `performance.mark('tcr:usable')` records when the page becomes interactive.
+
 ## Updating content
 
 - **Timetable:** `TCR.timetable` in `assets/js/data.js`. Day keys: `MW`, `TT`, `FS`, `SS`, `ON`.

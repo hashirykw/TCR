@@ -5,9 +5,9 @@
  */
 
 /* ---------- Fonts ---------- */
-@font-face{font-family:"Fraunces";src:url(../fonts/fraunces.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Hanken Grotesk";src:url(../fonts/hanken-grotesk.woff2) format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"JetBrains Mono";src:url(../fonts/jetbrains-mono.woff2) format("woff2");font-weight:100 800;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(../fonts/fraunces.woff2) format("woff2");font-weight:300 800;font-display:swap}
+@font-face{font-family:"Hanken Grotesk";src:url(../fonts/hanken-grotesk.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../fonts/jetbrains-mono.woff2) format("woff2");font-weight:400 700;font-display:swap}
 
 /* ---------- Constant tokens ---------- */
 :root{
@@ -1178,3 +1178,16 @@ section.slab{margin-block:clamp(20px,3vw,40px)}
 @media (max-width:760px){
   .slab .tile:not(.tile--hero):not(.tile--portal),.slab .fac,.slab .qa,.slab .countdown__item:not(:first-child),.slab .syl,.tags li{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* =====================================================================
+   PERFORMANCE — one blur layer per area, no layer bloat
+   ===================================================================== */
+/* cards sit on an already-frosted slab: blurring again costs a full extra pass for no visual gain */
+.slab .tile,.slab .fac,.slab .qa,.slab .countdown__item,.slab .syl,.tags li,.slab .seg,.slab .search,.slab .day,.slab .find__bar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* only things that actually animate get their own layer */
+.tile,.prog,.fac,.slab,.grades .band-in{will-change:auto}
+.programs__rail,.ldx-fill,.ldx-ink,.backdrop__aura i{will-change:transform}
+/* offscreen work: let the browser skip painting the footer + roster until needed */
+.roster,.foot__base{content-visibility:auto;contain-intrinsic-size:auto 300px}
+/* the aura and floor are decorative: freeze them while the intro plays */
+html.ld-on .backdrop__aura i,html.ld-on .stage__rings i{animation-play-state:paused}

@@ -1,5 +1,6 @@
 /* The Classroom — interactions */
 (() => {
+  performance.mark('tcr:main');
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement, D = window.TCR;
@@ -72,7 +73,7 @@
     const parts = $$('.ldx-fill,.ldx-ink,.ldx-m');
     const kill = () => { parts.forEach(p => p.remove()); root.classList.remove('ld-on'); };
     try { sessionStorage.setItem('tcr-seen', '1'); } catch (e) {}
-    if (!on || RM || !G) { kill(); return Promise.resolve(false); }
+    if (!on || RM || !G) { kill(); performance.mark('tcr:usable'); return Promise.resolve(false); }
     lock(true); window.scrollTo(0, 0);
     const fill = $('.ldx-fill'), ink = $('.ldx-ink'), gold = $('.ldx-gold'), N = $('#ldN');
     const L = $$('.ldx-ink .ldx-w i'), sub = $$('.ldx-s span'), metas = $$('.ldx-m');
@@ -84,30 +85,32 @@
     G.set(hw, { yPercent: 112 }); G.set(hb, { y: 34, autoAlpha: 0 });
     const st = { lv: 0, ps: 1.32 };
     const paint = () => { gold.style.setProperty('--lv', st.lv.toFixed(2)); gold.style.setProperty('--ps', st.ps.toFixed(3)); fill.querySelector('.ldx-crest').style.setProperty('--lv', st.lv.toFixed(2)); N.textContent = String(Math.round(st.lv)).padStart(3, '0'); };
-    const fonts = Promise.race([document.fonts && document.fonts.load ? document.fonts.load('800 100px "Fraunces"') : Promise.resolve(), new Promise(r => setTimeout(r, 900))]);
+    const fonts = Promise.race([document.fonts && document.fonts.load ? document.fonts.load('800 100px "Fraunces"') : Promise.resolve(), new Promise(r => setTimeout(r, 450))]);
     const frames = new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    performance.mark('tcr:loader-wait');
     return Promise.all([fonts, frames]).then(() => new Promise(res => {
+      performance.mark('tcr:loader-play');
       const E = 'expo.out';
       const skip = () => tl.timeScale(3.2);
       const tl = G.timeline({ onComplete: () => { kill(); removeEventListener('keydown', skip); } })
-        .to(metas, { autoAlpha: 1, y: 0, duration: .8, ease: E, stagger: .06 }, 0)
-        .to(L, { yPercent: 0, duration: 1.2, ease: E, stagger: .065 }, .12)
-        .to(sub, { yPercent: 0, duration: 1, ease: E }, .75)
-        .to(st, { lv: 100, duration: 2.3, ease: 'power2.inOut', onUpdate: paint }, .35)
-        .to(st, { ps: 1.06, duration: 3.2, ease: 'power1.inOut', onUpdate: paint }, 0)
+        .to(metas, { autoAlpha: 1, y: 0, duration: .5, ease: E, stagger: .04 }, 0)
+        .to(L, { yPercent: 0, duration: .75, ease: E, stagger: .035 }, .02)
+        .to(sub, { yPercent: 0, duration: .6, ease: E }, .3)
+        .to(st, { lv: 100, duration: .82, ease: 'power2.inOut', onUpdate: paint }, .1)
+        .to(st, { ps: 1.06, duration: 1.4, ease: 'power1.inOut', onUpdate: paint }, 0)
         .add(() => {
           const I = $('.ldx-ink .ldx-i').getBoundingClientRect();
           const o = (I.left + I.width * .26) + 'px ' + (I.top + I.height * .5) + 'px'; // the stem of the L
           G.set([ink, fill], { transformOrigin: o });
-        }, 2.75)
-        .to(metas, { autoAlpha: 0, y: -8, duration: .35, ease: 'power2.in' }, 2.75)
-        .to([ink, fill], { scale: 70, duration: 1.35, ease: 'expo.in' }, 2.8)
-        .to(fill, { opacity: 0, duration: .5, ease: 'power2.in' }, 3.15)
-        .add(() => { lock(false); res(true); }, 3.2)
-        .to(hw, { yPercent: 0, duration: 1.25, ease: E, stagger: .07 }, 3.2)
-        .to(hb, { y: 0, autoAlpha: 1, duration: 1.1, ease: E, stagger: .08, clearProps: 'transform,opacity,visibility' }, 3.35)
-        .to(['.nav', '.dock', '.mbar', '.announce'], { autoAlpha: 1, duration: .9, ease: 'power2.out', clearProps: 'opacity,visibility' }, 3.4)
-        .set(ink, { autoAlpha: 0 }, 4.15);
+        }, .94)
+        .to(metas, { autoAlpha: 0, y: -8, duration: .22, ease: 'power2.in' }, .94)
+        .to([ink, fill], { scale: 70, duration: .72, ease: 'expo.in' }, .96)
+        .to(fill, { opacity: 0, duration: .26, ease: 'power2.in' }, 1.14)
+        .add(() => { lock(false); performance.mark('tcr:usable'); res(true); }, 1.2)
+        .to(hw, { yPercent: 0, duration: 1, ease: E, stagger: .05 }, 1.16)
+        .to(hb, { y: 0, autoAlpha: 1, duration: .9, ease: E, stagger: .05, clearProps: 'transform,opacity,visibility' }, 1.24)
+        .to(['.nav', '.dock', '.mbar', '.announce'], { autoAlpha: 1, duration: .6, ease: 'power2.out', clearProps: 'opacity,visibility' }, 1.26)
+        .set(ink, { autoAlpha: 0 }, 1.7);
       fill.addEventListener('click', skip); ink.addEventListener('click', skip); addEventListener('keydown', skip, { once: true });
     }));
   }
@@ -287,11 +290,12 @@
   })();
 
   /* ================= MARQUEE ================= */
-  $$('.marquee').forEach(m => {
+  const idle = (f, timeout = 600) => (window.requestIdleCallback || (g => setTimeout(g, 1)))(f, { timeout });
+  idle(() => $$('.marquee').forEach(m => {
     const t = $('.marquee__track', m), c = t.cloneNode(true); c.setAttribute('aria-hidden', 'true'); m.appendChild(c);
     const d = (t.scrollWidth / (+m.dataset.speed || 40)).toFixed(1) + 's';
     $$('.marquee__track', m).forEach(x => x.style.setProperty('--marq', d));
-  });
+  }));
 
   /* ================= BOOKING MODAL (3 steps → WhatsApp) ================= */
   const book = $('#book'), form = $('#bookForm'), steps = $$('.step', form), dots = $$('.modal__steps li', book);
@@ -575,7 +579,12 @@
     $$('#shapeDots i').forEach((d, i) => d.classList.toggle('on', i === si));
   }
   function startCycle() { if (cycle || RM) return; cycle = setInterval(() => { if (inHero) showShape(order[(si + 1) % 4]); }, 4200); }
-  if (window.TCRGL) startCycle(); else $('.stage__label') && ($('.stage__label').style.display = 'none');
+  function bootGL() {
+    if (window.TCRGL || !window.TCRGLBoot) return !!window.TCRGL;
+    window.TCRGLBoot();
+    if (!window.TCRGL) { $('.stage__label') && ($('.stage__label').style.display = 'none'); return false; }
+    TCRGL.setTheme(root.dataset.theme); startCycle(); return true;
+  }
 
   /* ================= GSAP SCROLL SCENES ================= */
   function motion(introPlayed) {
@@ -626,7 +635,7 @@
     G.from('.band__in', { scale: .96, ease: 'none', scrollTrigger: { trigger: '.band__in', start: 'top bottom', end: 'top 55%', scrub: true } });
 
     // 3D particles: where they live as you scroll
-    if (window.TCRGL) {
+    if (bootGL()) {
       const place = (sel, shape, p) => ST.create({ trigger: sel, start: 'top 60%', end: 'bottom 40%', onToggle: s => { if (s.isActive) { inHero = false; TCRGL.setMode('free', p); showShape(shape); } } });
       ST.create({ trigger: '.hero', start: 'top top', end: 'bottom 30%', onToggle: s => { if (s.isActive) { inHero = true; TCRGL.setMode('hero'); } } });
       // the crest's quarters live behind every section, alternating sides
@@ -648,7 +657,11 @@
   /* ================= BOOT ================= */
   onScroll();
   loader().then(played => {
+    // the 3D engine starts once the page is usable, so it never competes with the intro
     root.classList.add('swash-on');
-    if (document.readyState === 'complete') motion(played); else addEventListener('load', () => motion(played), { once: true });
+    // let the landing animation finish on a quiet main thread, then build the scroll scenes and start 3D
+    const after = played ? 1400 : 0;
+    const go = () => setTimeout(() => idle(() => { motion(played); bootGL(); }, 500), after);
+    if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
   });
 })();
