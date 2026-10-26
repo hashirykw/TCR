@@ -80,7 +80,7 @@
     G.set(['.nav', '.dock', '.mbar', '.announce'], { autoAlpha: 0 });
     // hero is staged under the curtain so it can rise as the camera lands
     const ht = $('.hero__title'); splitWords(ht);
-    const hw = $$('.sw>span', ht), hb = ['.hero__motto', '.hero__lede', '.hero__actions', '.hero__facts', '.hero__stage'];
+    const hw = $$('.sw>span', ht), hb = ['.hero__motto', '.hero__lede', '.hero__actions', '.find', '.hero__stage', '.hstats'];
     G.set(hw, { yPercent: 112 }); G.set(hb, { y: 34, autoAlpha: 0 });
     const st = { lv: 0, ps: 1.32 };
     const paint = () => { gold.style.setProperty('--lv', st.lv.toFixed(2)); gold.style.setProperty('--ps', st.ps.toFixed(3)); fill.querySelector('.ldx-crest').style.setProperty('--lv', st.lv.toFixed(2)); N.textContent = String(Math.round(st.lv)).padStart(3, '0'); };
@@ -380,7 +380,7 @@
     palIdx = 0;
     palList.innerHTML = palItems.length ? palItems.map((it, i) => `<li role="option" aria-selected="${i === 0}" data-i="${i}"><span class="pk">${esc(it.k)}</span><span class="pt">${esc(it.t)}${it.sub ? `<small>${esc(it.sub)}</small>` : ''}</span><span class="pe">↵</span></li>`).join('') : `<li aria-selected="false"><span class="pt">Nothing found for “${esc(palIn.value)}”</span></li>`;
   }
-  function openPalette() { palFrom = document.activeElement; pal.hidden = false; palIn.value = ''; renderPal(); lock(true); setTimeout(() => palIn.focus(), 30); }
+  function openPalette(q) { palFrom = document.activeElement; pal.hidden = false; palIn.value = typeof q === 'string' ? q : ''; renderPal(); lock(true); palIn.focus({ preventScroll: true }); palIn.setSelectionRange(palIn.value.length, palIn.value.length); }
   function closePalette() { if (pal.hidden) return; pal.hidden = true; if (book.hidden && sheet.hidden) lock(false); palFrom && palFrom.focus && palFrom.focus({ preventScroll: true }); }
   const runPal = i => { const it = palItems[i]; if (!it) return; closePalette(); it.run(); };
   palIn.addEventListener('input', renderPal);
@@ -390,7 +390,52 @@
   });
   palList.addEventListener('click', e => { const li = e.target.closest('li[data-i]'); if (li) runPal(+li.dataset.i); });
   pal.addEventListener('click', e => { if (e.target.closest('[data-palette-close]')) closePalette(); });
-  $$('[data-palette]').forEach(b => b.addEventListener('click', openPalette));
+  $$('[data-palette]').forEach(b => b.addEventListener('click', () => openPalette()));
+
+  /* ================= HERO: find bar, level jump, live next class ================= */
+  const findForm = $('#heroFind'), findIn = $('#heroFindIn'), findBar = $('.find__bar');
+  findIn.addEventListener('input', () => { const v = findIn.value; if (!v.trim()) return; findIn.value = ''; if (pal.hidden) openPalette(v); else { palIn.value += v; renderPal(); palIn.focus(); } });
+  findForm.addEventListener('submit', e => { e.preventDefault(); openPalette(findIn.value); findIn.value = ''; });
+  // rotating placeholder: real things students search for
+  (() => {
+    const tips = ['Try “Physics”', 'Try “9709”', 'Try “Sir Yawar Abbas”', 'Try “Accounting”', 'Try “5054”', 'Try “Grade calculator”'];
+    let k = 0; if (RM) return;
+    setInterval(() => { if (document.activeElement === findIn) return; findBar.classList.add('swap'); setTimeout(() => { k = (k + 1) % tips.length; findIn.placeholder = tips[k]; findBar.classList.remove('swap'); }, 260); }, 2600);
+  })();
+  $$('[data-jump]').forEach(b => b.addEventListener('click', () => {
+    const l = b.dataset.jump; segSelect(ttSeg, $(`[data-tt="${l}"]`, ttSeg)); ttLvl = l; renderTT(); scrollTo($('#timetable'));
+  }));
+  // next class: parse the published timetable against Karachi time
+  (() => {
+    const DAY = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    const days = { MW: [1, 3], TT: [2, 4], FS: [5, 6], SS: [6, 0] };
+    const toMin = t => { let [h, m] = t.split(':').map(Number); if (h < 12) h += 12; return h * 60 + (m || 0); }; // every class is afternoon/evening
+    const slots = [];
+    Object.entries(D.timetable).forEach(([lvl, rows]) => rows.forEach(r => {
+      if (!days[r[2]]) return;
+      if (r[3].includes('·')) r[3].split('·').forEach(part => { const m = part.trim().match(/^(Fri|Sat)\s+(\d{1,2}:\d{2})/); if (m) slots.push({ d: DAY[m[1]], s: toMin(m[2]), r, lvl }); });
+      else { const m = r[3].match(/(\d{1,2}:\d{2})/); if (m) days[r[2]].forEach(d => slots.push({ d, s: toMin(m[1]), r, lvl })); }
+    }));
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Karachi', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false });
+    const nm = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], LVN = { O: 'O Level', AS: 'AS', A2: 'A2' };
+    const clock = m => { const h = Math.floor(m / 60), mm = String(m % 60).padStart(2, '0'); return `${(h % 12) || 12}:${mm} ${h >= 12 ? 'PM' : 'AM'}`; };
+    function tick() {
+      const p = fmt.formatToParts(new Date()), wd = DAY[p.find(x => x.type === 'weekday').value];
+      const now = wd * 1440 + (+p.find(x => x.type === 'hour').value % 24) * 60 + (+p.find(x => x.type === 'minute').value);
+      let best = null, bestGap = Infinity;
+      slots.forEach(sl => { let g = sl.d * 1440 + sl.s - now; if (g < -10) g += 7 * 1440; if (g < bestGap) { bestGap = g; best = sl; } });
+      if (!best) return;
+      const card = $('#nextClass'), live = bestGap <= 0;
+      $('#ncLabel').textContent = live ? 'In class now' : 'Next class';
+      $('#ncSubj').textContent = `${best.r[0]} · ${LVN[best.lvl]}`;
+      $('#ncMeta').textContent = `${best.r[1]} · ${best.r[4]}`;
+      const h = Math.floor(bestGap / 60), m = bestGap % 60;
+      $('#ncWhen').textContent = live ? `Started ${clock(best.s)}` : bestGap < 60 ? `Starts in ${m} min` : bestGap < 1440 ? `${nm[best.d]} ${clock(best.s)} · in ${h}h ${m}m` : `${nm[best.d]} ${clock(best.s)}`;
+      card.classList.toggle('is-now', live || bestGap < 60);
+      card.setAttribute('aria-label', `${$('#ncLabel').textContent}: ${$('#ncSubj').textContent}, ${$('#ncMeta').textContent}, ${$('#ncWhen').textContent}`);
+    }
+    tick(); setInterval(tick, 30000);
+  })();
 
   /* ================= ASK TCR (rule-based, answers from the real data) ================= */
   const bot = $('#bot'), log = $('#botLog'), botIn = $('#botIn'), chipsBox = $('#botChips'), askBtns = $$('[data-bot]');

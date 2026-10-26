@@ -129,25 +129,48 @@
         <button class="btn btn--primary btn--lg" data-book><span>Reserve a seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
         <a class="btn btn--outline btn--lg" href="#timetable"><svg class="i"><use href="#i-cal"/></svg><span>This week’s classes</span></a>
       </div>
-      <ul class="hero__facts">
-        <li><svg class="i"><use href="#i-grid"/></svg><span><b>O Level</b>&nbsp;· AS · A2</span></li>
-        <li><svg class="i"><use href="#i-clock"/></svg><span><b>Mon–Sat</b>&nbsp;evenings</span></li>
-        <li><svg class="i"><use href="#i-pin"/></svg><span><b>Plot C-22</b>,&nbsp;Block I</span></li>
-      </ul>
+      <form class="find" id="heroFind" role="search">
+        <label class="find__bar">
+          <svg class="i"><use href="#i-search"/></svg>
+          <span class="sr">Find a class, syllabus code or teacher</span>
+          <input id="heroFindIn" autocomplete="off" placeholder="Try “Physics”">
+          <kbd class="mono" aria-hidden="true">⌘K</kbd>
+        </label>
+        <div class="find__lv" role="group" aria-label="Jump to a level’s timetable">
+          <span>Jump to</span>
+          <button type="button" data-jump="O">O Level</button>
+          <button type="button" data-jump="AS">AS</button>
+          <button type="button" data-jump="A2">A2</button>
+        </div>
+      </form>
     </div>
 
-    <div class="hero__stage" id="stage" aria-hidden="true">
-      <div class="stage__rings"><i></i><i></i></div>
-      <div class="medal">
+    <div class="hero__stage" id="stage">
+      <div class="stage__rings" aria-hidden="true"><i></i><i></i></div>
+      <div class="medal" aria-hidden="true">
         <div class="medal__disc">
           <img src="assets/img/crest.webp" width="375" height="391" alt="" class="medal__crest" fetchpriority="high">
         </div>
-        <div class="chip chip--a"><span class="mono">27</span> Cambridge syllabuses</div>
-        <div class="chip chip--b"><span class="mono">38</span> classes a week</div>
-        <div class="chip chip--c"><svg class="i i--fill"><use href="#i-star"/></svg><span class="mono">4.9</span> Facebook · 52 ratings</div>
+        <div class="chip chip--a"><svg class="i"><use href="#i-grid"/></svg>Cambridge International</div>
+        <div class="chip chip--b"><svg class="i"><use href="#i-pin"/></svg>Block I, North Nazimabad</div>
       </div>
-      <div class="stage__label"><span class="stage__dots" id="shapeDots"><i class="on"></i><i></i><i></i><i></i></span><span><b id="shapeName">The atom</b> · <span id="shapeSub">science quarter of our crest</span></span></div>
+      <div class="stage__label" aria-hidden="true"><span class="stage__dots" id="shapeDots"><i class="on"></i><i></i><i></i><i></i></span><span><b id="shapeName">The atom</b> · <span id="shapeSub">science quarter of our crest</span></span></div>
+      <a class="nextc" id="nextClass" href="#timetable" aria-live="polite">
+        <span class="nextc__k mono"><i class="live"></i><span id="ncLabel">Next class</span></span>
+        <b class="nextc__s" id="ncSubj">Loading the timetable…</b>
+        <span class="nextc__m" id="ncMeta"></span>
+        <span class="nextc__t mono" id="ncWhen"></span>
+      </a>
     </div>
+  </div>
+  <div class="wrap">
+    <ul class="hstats" aria-label="The Classroom at a glance">
+      <li><b class="mono">27</b><span>Cambridge syllabuses</span></li>
+      <li><b class="mono">38</b><span>classes every week</span></li>
+      <li><b class="mono">20</b><span>subject teachers</span></li>
+      <li><b class="mono">4.9<svg class="i i--fill"><use href="#i-star"/></svg></b><span>52 Facebook ratings</span></li>
+      <li class="hstats__lv"><b>O · AS · A2</b><span>Mon–Sat, after school</span></li>
+    </ul>
   </div>
 </section>
 
