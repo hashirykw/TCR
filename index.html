@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Classroom · O Level, AS & A Level Academy · North Nazimabad, Karachi</title>
-<meta name="description" content="The Classroom (TCR) is a Cambridge O Level, AS and A2 academy at Plot C-22, Block I, North Nazimabad, Karachi. Weekly classes, 20+ subject teachers, full syllabus library and timetable.">
-<meta name="theme-color" content="#0b0f1c">
+<meta name="description" content="The Classroom (TCR) is a Cambridge O Level, AS and A2 academy at Plot C-22, Block I, North Nazimabad, Karachi. 38 weekly classes, 20 subject teachers, full syllabus library, grade calculator and timetable.">
+<meta name="theme-color" content="#fdfbf8">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:title" content="The Classroom · Strive toward higher things">
@@ -16,36 +16,68 @@
 <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/img/crest.webp" as="image">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>try{if(!sessionStorage.getItem("tcr-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("intro")}catch(e){}</script>
+<script>(function(){var d=document.documentElement,t="light";try{t=localStorage.getItem("tcr-theme")||"light"}catch(e){}d.dataset.theme=t;try{if(!sessionStorage.getItem("tcr-seen")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("ld-on")}catch(e){}})();</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"EducationalOrganization","name":"The Classroom (TCR)","alternateName":"The Classroom North Nazimabad","url":"https://www.theclassroom.pk","logo":"https://www.theclassroom.pk/assets/img/crest-full.webp","email":"info@theclassroom.pk","telephone":"+92 311 1111827","address":{"@type":"PostalAddress","streetAddress":"Plot C-22, Block I, North Nazimabad","addressLocality":"Karachi","postalCode":"74700","addressCountry":"PK"},"geo":{"@type":"GeoCoordinates","latitude":24.9441,"longitude":67.0463},"slogan":"Ad Altiora Tendo"}
 </script>
 </head>
 <body>
-<div class="loader" aria-hidden="true">
-  <div class="loader__curtain"></div>
-  <div class="loader__panel">
-    <div class="loader__lines"></div>
-    <div class="loader__rise"></div>
-    <div class="loader__center">
-      <img class="loader__crest" src="assets/img/crest.webp" width="375" height="391" alt="">
-      <div class="loader__grade"><div class="loader__reel"><span>E</span><span>D</span><span>C</span><span>B</span><span>A</span><span class="is-star">A*</span></div></div>
-      <div class="loader__bar"><i></i></div>
-      <div class="loader__meta"><span class="loader__motto"><span>A</span><span>d</span>&nbsp;<span>A</span><span>l</span><span>t</span><span>i</span><span>o</span><span>r</span><span>a</span>&nbsp;<span>T</span><span>e</span><span>n</span><span>d</span><span>o</span></span><span class="loader__pct mono">000</span></div>
-    </div>
-    <div class="loader__foot mono"><span>The Classroom</span><span>O Level · AS · A2</span><span>North Nazimabad</span></div>
-  </div>
+
+<!-- One icon set, one stroke voice -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-login" viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 16l4-4-4-4M14 12H4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4 12 20 4l-5 16-3-7z"/><path d="m12 13 8-9"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M10 9v4l3.5-2z"/><path d="M8 20h8"/></symbol>
+  </defs>
+</svg>
+
+<div class="ldx" aria-hidden="true">
+  <div class="ldx-fill"><div class="ldx-grp"><div class="ldx-w">CLASSROOM<div class="ldx-gold"><img src="assets/img/crest.webp" alt=""><i class="ldx-shine"></i></div><i class="ldx-crest"></i></div><div class="ldx-s"><span>O Level · AS · A2 — North Nazimabad</span></div></div></div>
+  <div class="ldx-ink"><div class="ldx-grp"><div class="ldx-w"><i>C</i><i class="ldx-i">L</i><i>A</i><i>S</i><i>S</i><i>R</i><i>O</i><i>O</i><i>M</i></div><div class="ldx-s"><span>O Level · AS · A2 — North Nazimabad</span></div></div></div>
+  <div class="ldx-m ldx-tl"><img src="assets/img/crest.webp" alt="" width="375" height="391"><span>The Classroom</span></div>
+  <div class="ldx-m ldx-tr">CAIE · Cambridge International</div>
+  <div class="ldx-m ldx-bl"><b id="ldN">000</b><span>Loading the timetable</span></div>
+  <div class="ldx-m ldx-br">Ad Altiora Tendo</div>
 </div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Ascent rail: grade ladder that lights up as you scroll -->
+<!-- Results countdown bar -->
+<div class="announce" id="announce">
+  <div class="announce__in">
+    <span class="announce__dot" aria-hidden="true"></span>
+    <p><b>November 2026 results:</b> AS &amp; A Level on <b>7 Jan</b> · O Level on <b>14 Jan</b> <span class="announce__count mono" id="announceCount"></span></p>
+    <a class="announce__link" href="#calendar">Exam calendar<svg class="i"><use href="#i-arrow"/></svg></a>
+  </div>
+  <button class="announce__x" aria-label="Dismiss announcement"><svg class="i"><use href="#i-close"/></svg></button>
+</div>
+
 <div class="rail" aria-hidden="true">
   <span data-g="E">E</span><span data-g="C">C</span><span data-g="B">B</span><span data-g="A">A</span><span data-g="A*">A*</span>
   <i class="rail__fill"></i>
 </div>
 
 <header class="nav" id="nav">
-  <div class="nav__pill glass">
+  <div class="nav__pill">
     <a class="nav__brand" href="#top" aria-label="The Classroom, home">
       <img src="assets/img/crest.webp" width="375" height="391" alt="" class="nav__crest">
       <span class="nav__name"><b>The Classroom</b><small>North Nazimabad</small></span>
@@ -53,26 +85,30 @@
     <nav class="nav__links" aria-label="Main">
       <a href="#programs">Programs</a>
       <a href="#syllabus">Syllabus</a>
+      <a href="#grades">Grades</a>
       <a href="#timetable">Timetable</a>
       <a href="#faculty">Faculty</a>
       <a href="#visit">Visit</a>
       <i class="nav__ind" aria-hidden="true"></i>
     </nav>
     <div class="nav__cta">
-      <a class="btn btn--ghost btn--sm" href="https://the-classroom.learn360lms.com" rel="noopener">Student portal</a>
-      <a class="btn btn--red btn--sm magnetic" href="https://wa.me/923111111827?text=Assalam%20o%20Alaikum%2C%20I%27d%20like%20to%20book%20a%20seat%20at%20The%20Classroom." rel="noopener"><span>Book a seat</span></a>
+      <div class="theme" role="group" aria-label="Theme"><button data-theme-set="light" aria-pressed="true" aria-label="Light theme"><svg class="i"><use href="#i-sun"/></svg></button><button data-theme-set="dark" aria-pressed="false" aria-label="Dark theme"><svg class="i"><use href="#i-moon"/></svg></button><i class="theme__thumb"></i></div>
+      <button class="iconbtn" data-palette aria-label="Search subjects and teachers"><svg class="i"><use href="#i-search"/></svg><kbd class="mono">⌘K</kbd></button>
+      <a class="btn btn--quiet btn--sm" href="https://the-classroom.learn360lms.com" rel="noopener"><svg class="i"><use href="#i-login"/></svg><span>Portal</span></a>
+      <button class="btn btn--primary btn--sm" data-book><span>Reserve a seat</span></button>
     </div>
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i><i></i></button>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </header>
 
-<div class="drawer glass-strong" id="drawer" hidden>
+<div class="menu" id="menu" hidden>
   <nav aria-label="Mobile">
-    <a href="#programs">Programs</a><a href="#syllabus">Syllabus</a><a href="#timetable">Timetable</a><a href="#faculty">Faculty</a><a href="#thresholds">A* thresholds</a><a href="#visit">Visit</a>
+    <a href="#programs">Programs</a><a href="#syllabus">Syllabus</a><a href="#grades">Grade calculator</a><a href="#timetable">Timetable</a><a href="#faculty">Faculty</a><a href="#faq">FAQ</a><a href="#visit">Visit</a>
   </nav>
-  <div class="drawer__cta">
-    <a class="btn btn--red" href="https://wa.me/923111111827" rel="noopener">Book a seat on WhatsApp</a>
-    <a class="btn btn--ghost" href="https://the-classroom.learn360lms.com" rel="noopener">Student portal</a>
+  <div class="menu__row"><span>Theme</span><div class="theme" role="group" aria-label="Theme"><button data-theme-set="light" aria-pressed="true" aria-label="Light theme"><svg class="i"><use href="#i-sun"/></svg></button><button data-theme-set="dark" aria-pressed="false" aria-label="Dark theme"><svg class="i"><use href="#i-moon"/></svg></button><i class="theme__thumb"></i></div></div>
+  <div class="menu__cta">
+    <button class="btn btn--primary btn--block btn--sm" data-book><span>Reserve a seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
+    <a class="btn btn--outline btn--block btn--sm" href="https://the-classroom.learn360lms.com" rel="noopener"><svg class="i"><use href="#i-login"/></svg><span>Student portal</span></a>
   </div>
 </div>
 
@@ -83,7 +119,6 @@
   <div class="hero__bg" aria-hidden="true">
     <div class="hero__grid"></div>
     <div class="hero__glow hero__glow--a"></div>
-    <div class="hero__glow hero__glow--b"></div>
   </div>
   <div class="wrap hero__inner">
     <div class="hero__copy">
@@ -91,35 +126,27 @@
       <h1 class="hero__title">Strive toward <span class="hl">higher<svg class="hl__swash" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 32 C 70 30, 150 24, 296 6"/></svg></span> things.</h1>
       <p class="hero__lede">Cambridge O Level, AS and A2 classes in Block I, North Nazimabad. Twenty subject teachers, a timetable built around school hours, and every syllabus mapped for the 2027 exams.</p>
       <div class="hero__actions">
-        <a class="btn btn--red btn--lg magnetic" href="https://wa.me/923111111827?text=Assalam%20o%20Alaikum%2C%20I%27d%20like%20to%20book%20a%20seat%20at%20The%20Classroom." rel="noopener"><span>Book a seat</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn--glass btn--lg" href="#timetable"><span>See this week’s classes</span></a>
+        <button class="btn btn--primary btn--lg" data-book><span>Reserve a seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
+        <a class="btn btn--outline btn--lg" href="#timetable"><svg class="i"><use href="#i-cal"/></svg><span>This week’s classes</span></a>
       </div>
       <ul class="hero__facts">
-        <li><b>O Level</b>&nbsp;· AS · A2</li>
-        <li><b>Mon–Sat</b>&nbsp;evenings</li>
-        <li><b>Plot C-22</b>,&nbsp;Block I</li>
+        <li><svg class="i"><use href="#i-grid"/></svg><span><b>O Level</b>&nbsp;· AS · A2</span></li>
+        <li><svg class="i"><use href="#i-clock"/></svg><span><b>Mon–Sat</b>&nbsp;evenings</span></li>
+        <li><svg class="i"><use href="#i-pin"/></svg><span><b>Plot C-22</b>,&nbsp;Block I</span></li>
       </ul>
     </div>
 
-    <div class="hero__stage" aria-hidden="true">
-      <svg class="orbits" viewBox="0 0 600 600">
-        <defs>
-          <linearGradient id="og" x1="0" x2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".0"/><stop offset=".5" stop-color="currentColor" stop-opacity=".55"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient>
-        </defs>
-        <g class="orb orb--1"><ellipse cx="300" cy="300" rx="280" ry="110" stroke="url(#og)"/><circle cx="580" cy="300" r="5"/></g>
-        <g class="orb orb--2"><ellipse cx="300" cy="300" rx="280" ry="110" stroke="url(#og)"/><circle cx="20" cy="300" r="4"/></g>
-        <g class="orb orb--3"><ellipse cx="300" cy="300" rx="280" ry="110" stroke="url(#og)"/><circle cx="300" cy="190" r="3.5"/></g>
-        <circle cx="300" cy="300" r="232" class="ring"/>
-        <circle cx="300" cy="300" r="268" class="ring ring--dash"/>
-      </svg>
-      <div class="medal tilt">
-        <div class="medal__glass glass-strong">
+    <div class="hero__stage" id="stage" aria-hidden="true">
+      <div class="stage__rings"><i></i><i></i></div>
+      <div class="medal">
+        <div class="medal__disc">
           <img src="assets/img/crest.webp" width="375" height="391" alt="" class="medal__crest" fetchpriority="high">
         </div>
-        <div class="chip glass chip--a"><span class="mono">27</span> Cambridge syllabuses</div>
-        <div class="chip glass chip--b"><span class="mono">38</span> classes a week</div>
-        <div class="chip glass chip--c"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><span class="mono">4.9</span> Facebook · 52 ratings</div>
+        <div class="chip chip--a"><span class="mono">27</span> Cambridge syllabuses</div>
+        <div class="chip chip--b"><span class="mono">38</span> classes a week</div>
+        <div class="chip chip--c"><svg class="i i--fill"><use href="#i-star"/></svg><span class="mono">4.9</span> Facebook · 52 ratings</div>
       </div>
+      <div class="stage__label"><span class="stage__dots" id="shapeDots"><i class="on"></i><i></i><i></i><i></i></span><span><b id="shapeName">The atom</b> · <span id="shapeSub">science quarter of our crest</span></span></div>
     </div>
   </div>
 </section>
@@ -131,20 +158,46 @@
       <span><b>4024</b>Mathematics</span><span><b>5054</b>Physics</span><span><b>5070</b>Chemistry</span><span><b>5090</b>Biology</span><span><b>2210</b>Computer Science</span><span><b>7707</b>Accounting</span><span><b>7081</b>Business</span><span><b>2281</b>Economics</span><span><b>2059</b>Pakistan Studies</span><span><b>2058</b>Islamiyat</span><span><b>1123</b>English</span><span><b>9709</b>A Level Maths</span><span><b>9702</b>A Level Physics</span><span><b>9701</b>A Level Chemistry</span><span><b>9618</b>A Level CS</span><span><b>9708</b>A Level Economics</span><span><b>9990</b>Psychology</span><span><b>9699</b>Sociology</span>
     </div>
   </div>
-  <div class="marquee marquee--rev" data-speed="30" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Sir Yawar Abbas · Physics</span><span>Sir Rizwan Khan · Chemistry</span><span>Sir Farrukh Khan · Mathematics</span><span>Sir Abdul Sami · Economics</span><span>Sir Nauman Zafar · Accounting</span><span>Sir M. Ali Khan · Computer Science</span><span>Sir Azhar ul Hassan · Business</span><span>Sir Adnan Khan · A Level Chemistry</span><span>Sir Omer Soni · Biology</span><span>Sir Raza Hussain · English</span><span>Ms Ambreen Rahman · Pakistan Studies</span><span>Sir Jameel Ansari · Urdu</span><span>Sir Shahid Ansari · Islamiyat</span><span>Sir Abdullah Shahmeer · Sociology</span>
-    </div>
-  </div>
 </section>
 
-<!-- ============ NUMBERS ============ -->
-<section class="numbers wrap" aria-label="The Classroom in numbers">
-  <div class="numbers__grid">
-    <div class="num"><b class="count" data-to="27">27</b><span>Cambridge syllabuses taught</span></div>
-    <div class="num"><b class="count" data-to="38">38</b><span>Classes on the weekly timetable</span></div>
-    <div class="num"><b class="count" data-to="20">20</b><span>Subject teachers on the faculty</span></div>
-    <div class="num"><b><span class="count" data-to="33.6" data-dec="1">33.6</span>K</b><span>Followers on Facebook</span></div>
+<!-- ============ WHY (bento) ============ -->
+<section class="why wrap" aria-labelledby="whyTitle">
+  <div class="sec-head">
+    <h2 class="h2" id="whyTitle">Built around the<br>Cambridge year.</h2>
+    <p class="lede">Every number here comes from the published timetable and Cambridge syllabus list, not a marketing deck.</p>
+  </div>
+  <div class="bento">
+    <article class="tile tile--hero card-in">
+      <span class="tile__k mono">Under one roof</span>
+      <p class="tile__big"><b class="count" data-to="27">27</b><span>Cambridge syllabuses</span></p>
+      <p class="tile__p">15 at O Level and 12 at AS &amp; A Level, from Additional Maths to Urdu Language &amp; Literature.</p>
+      <div class="tile__codes mono" aria-hidden="true"><span>4024</span><span>4037</span><span>5054</span><span>5070</span><span>5090</span><span>2210</span><span>7707</span><span>7081</span><span>2281</span><span>9709</span><span>9702</span><span>9701</span><span>9618</span><span>9706</span><span>9708</span></div>
+    </article>
+    <article class="tile tile--week card-in">
+      <span class="tile__k mono">This week</span>
+      <p class="tile__big"><b class="count" data-to="38">38</b><span>classes on the timetable</span></p>
+      <div class="week" id="weekBars" aria-label="Classes per day"></div>
+    </article>
+    <article class="tile tile--faculty card-in">
+      <span class="tile__k mono">Faculty</span>
+      <p class="tile__big"><b class="count" data-to="20">20</b><span>subject teachers</span></p>
+      <div class="avatars" aria-hidden="true"><i>YA</i><i>MA</i><i>RK</i><i>AS</i><i>NZ</i><i>FK</i><i>+14</i></div>
+    </article>
+    <article class="tile tile--online card-in">
+      <span class="tile__k mono">Online</span>
+      <h3>Psychology &amp; Sociology, live online</h3>
+      <p class="tile__p">AS and A2 classes that fit around your schedule.</p>
+    </article>
+    <article class="tile tile--portal card-in">
+      <span class="tile__k mono">Student portal</span>
+      <h3>Lectures, tests and notes in one login.</h3>
+      <a class="btn btn--light btn--sm" href="https://the-classroom.learn360lms.com" rel="noopener"><svg class="i"><use href="#i-login"/></svg><span>Open portal</span></a>
+    </article>
+    <article class="tile tile--social card-in">
+      <span class="tile__k mono">Community</span>
+      <p class="tile__big"><b><span class="count" data-to="33.6" data-dec="1">33.6</span>K</b><span>follow on Facebook</span></p>
+      <p class="tile__rating"><span class="stars" aria-hidden="true"><svg class="i i--fill"><use href="#i-star"/></svg><svg class="i i--fill"><use href="#i-star"/></svg><svg class="i i--fill"><use href="#i-star"/></svg><svg class="i i--fill"><use href="#i-star"/></svg><svg class="i i--fill"><use href="#i-star"/></svg></span><b>4.9</b> from 52 ratings</p>
+    </article>
   </div>
 </section>
 
@@ -155,31 +208,30 @@
       <h2 class="h2">Three tracks.<br>One climb.</h2>
       <p class="lede">From your first O Level paper to the university offer, each stage has its own teachers, rooms and timetable.</p>
     </div>
-    <img class="programs__crest" src="assets/img/crest.webp" width="375" height="391" alt="" aria-hidden="true" loading="lazy">
     <div class="programs__rail">
-      <article class="prog glass spot">
-        <span class="prog__step mono">01</span><span class="prog__big" aria-hidden="true">01</span>
+      <article class="prog">
+        <span class="prog__step mono">01 / O Level</span><span class="prog__big" aria-hidden="true">01</span>
         <h3>O Level</h3>
         <p>The full Cambridge O Level set, taught after school hours so it fits around your school day.</p>
-        <ul class="tags"><li>Maths & Add Maths</li><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Computer Science</li><li>Accounting</li><li>Business</li><li>Economics</li><li>English</li><li>Urdu</li><li>Islamiyat</li><li>Pakistan Studies</li></ul>
-        <a class="link-arrow" href="#syllabus" data-lvl="O">Browse O Level syllabuses</a>
+        <ul class="tags"><li>Maths &amp; Add Maths</li><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Computer Science</li><li>Accounting</li><li>Business</li><li>Economics</li><li>English</li><li>Urdu</li><li>Islamiyat</li><li>Pakistan Studies</li></ul>
+        <div class="prog__foot"><a class="btn btn--text" href="#syllabus" data-lvl="O"><span>O Level syllabuses</span><svg class="i"><use href="#i-arrow"/></svg></a><button class="btn btn--light btn--sm" data-book data-book-level="O"><span>Reserve</span></button></div>
       </article>
-      <article class="prog glass spot">
-        <span class="prog__step mono">02</span><span class="prog__big" aria-hidden="true">02</span>
-        <h3>AS & A2 Level</h3>
+      <article class="prog">
+        <span class="prog__step mono">02 / AS &amp; A2</span><span class="prog__big" aria-hidden="true">02</span>
+        <h3>AS &amp; A2 Level</h3>
         <p>Advanced Level subjects for Science, Commerce and Humanities streams, with Friday–Saturday blocks for the sciences.</p>
         <ul class="tags"><li>Mathematics</li><li>Physics</li><li>Chemistry</li><li>Computer Science</li><li>Accounting</li><li>Business</li><li>Economics</li><li>Urdu</li><li>Psychology · online</li><li>Sociology · online</li></ul>
-        <a class="link-arrow" href="#syllabus" data-lvl="A">Browse A Level syllabuses</a>
+        <div class="prog__foot"><a class="btn btn--text" href="#syllabus" data-lvl="A"><span>A Level syllabuses</span><svg class="i"><use href="#i-arrow"/></svg></a><button class="btn btn--light btn--sm" data-book data-book-level="AS"><span>Reserve</span></button></div>
       </article>
-      <article class="prog glass spot">
-        <span class="prog__step mono">03</span><span class="prog__big" aria-hidden="true">03</span>
+      <article class="prog">
+        <span class="prog__step mono">03 / Admissions</span><span class="prog__big" aria-hidden="true">03</span>
         <h3>University preparation</h3>
         <p>Help with applications at home and abroad, and preparation for local entry tests.</p>
         <ul class="tags"><li>Personal statements</li><li>Interview practice</li><li>Career counselling</li><li>Scholarship guidance</li></ul>
-        <a class="link-arrow" href="#visit">Talk to an advisor</a>
+        <div class="prog__foot"><a class="btn btn--text" href="#visit"><span>Talk to an advisor</span><svg class="i"><use href="#i-arrow"/></svg></a></div>
       </article>
-      <article class="prog prog--tests glass spot">
-        <span class="prog__step mono">04</span><span class="prog__big" aria-hidden="true">04</span>
+      <article class="prog prog--tests">
+        <span class="prog__step mono">04 / Entry tests</span><span class="prog__big" aria-hidden="true">04</span>
         <h3>Entry tests</h3>
         <p>Preparation for the admission tests Karachi students sit after A Levels.</p>
         <div class="unis"><span>IBA</span><span>IOBM</span><span>LUMS</span><span>NUST</span><span>GIKI</span><span>FAST</span></div>
@@ -192,75 +244,87 @@
 <!-- ============ SYLLABUS EXPLORER ============ -->
 <section class="syllabus wrap" id="syllabus">
   <div class="sec-head">
-    <div>
-      <h2 class="h2">Every paper, every topic.</h2>
-    </div>
-    <p class="lede">The official Cambridge syllabus for each subject we teach, in the version that applies to the 2027 exams. Tap a code to open its papers and topics.</p>
+    <h2 class="h2">Every paper,<br>every topic.</h2>
+    <p class="lede">The official Cambridge syllabus for each subject we teach, in the version that applies to the 2027 exams. Open a code to see its papers and topics.</p>
   </div>
-
   <div class="syl-tools">
     <div class="seg" role="group" aria-label="Level">
       <button aria-pressed="true" data-lvl="O">O Level <span class="mono">15</span></button>
-      <button aria-pressed="false" data-lvl="A">AS & A Level <span class="mono">10</span></button>
+      <button aria-pressed="false" data-lvl="A">AS &amp; A Level <span class="mono">12</span></button>
       <i class="seg__thumb"></i>
     </div>
-    <label class="search surface">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input type="search" id="sylSearch" placeholder="Search a subject or code" autocomplete="off">
+    <label class="search">
+      <svg class="i"><use href="#i-search"/></svg>
+      <input type="search" id="sylSearch" placeholder="Search a subject, code or teacher" autocomplete="off">
+      <kbd class="mono" aria-hidden="true">/</kbd>
     </label>
   </div>
-
   <div class="syl-grid" id="sylGrid" aria-live="polite"></div>
-
   <aside class="change">
     <p class="change__title">Sitting in 2027? Three things changed.</p>
     <ol>
       <li><b>Business Studies 7115 is gone.</b> O Level students now sit Business 7081.</li>
       <li><b>New Economics 2281 and Accounting 7707</b>, with longer multiple-choice papers.</li>
-      <li><b>A Level Urdu moves to 9866</b>, the Pakistan-only Language & Literature syllabus.</li>
+      <li><b>A Level Urdu moves to 9866</b>, the Pakistan-only Language &amp; Literature syllabus.</li>
     </ol>
   </aside>
 </section>
 
-<!-- syllabus drawer -->
-<div class="sheet" id="sheet" hidden>
-  <div class="sheet__scrim" data-close></div>
-  <div class="sheet__panel glass-strong" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <button class="sheet__close" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <div id="sheetBody"></div>
-  </div>
-</div>
-
-<!-- ============ A* THRESHOLDS ============ -->
-<section class="thresh" id="thresholds">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h2">What an A* actually took.</h2>
+<!-- ============ PAPER: GRADES (calculator + thresholds) ============ -->
+<section class="grades invert" id="grades">
+  <div class="band-in">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2">What would your<br>mark have earned?</h2>
+        <p class="lede">Slide to your expected percentage. We check it against Cambridge’s official June 2026 overall thresholds, the same numbers examiners used.</p>
       </div>
-      <p class="lede">There is no single “90% for an A*”. Cambridge’s official overall thresholds from June 2026 swing from 68% in Islamiyat to 92% in A Level Maths. Ranges cover every paper variant.</p>
+
+      <div class="calc" id="calc">
+        <div class="calc__controls">
+          <div class="field">
+            <label for="calcSubject">Subject</label>
+            <div class="select"><select id="calcSubject"></select></div>
+          </div>
+          <div class="field">
+            <label for="calcMark">Your mark <output id="calcOut" class="mono">80%</output></label>
+            <input type="range" id="calcMark" min="0" max="100" value="80" step="1">
+            <div class="calc__ticks mono" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+          </div>
+          <p class="calc__note">Thresholds move every series. Treat this as a guide, not a promise.</p>
+        </div>
+        <div class="calc__result" aria-live="polite">
+          <div class="flip" id="calcFlip"><div class="flip__in"><span class="flip__f" id="calcGrade">A</span><span class="flip__b" id="calcGradeB">A</span></div></div>
+          <p class="calc__verdict" id="calcVerdict"></p>
+          <div class="calc__track" id="calcTrack" aria-hidden="true"><i class="calc__pin" id="calcPin"></i></div>
+          <dl class="calc__legend" id="calcLegend"></dl>
+        </div>
+      </div>
+
+      <div class="thresh">
+        <div class="thresh__top">
+          <h3 class="h3">The full June 2026 picture.</h3>
+          <div class="seg seg--sm" role="group" aria-label="Threshold level">
+            <button aria-pressed="true" data-t="O">O Level</button>
+            <button aria-pressed="false" data-t="A">A Level</button>
+            <i class="seg__thumb"></i>
+          </div>
+        </div>
+        <div class="bars" id="bars">
+          <div class="bars__legend"><span class="k k--astar">A*</span><span class="k k--a">A</span><span class="k k--c">C</span><span class="k k--z">Below C</span></div>
+          <div class="bars__head"><span></span><span class="bars__scale mono"><i style="left:0">0</i><i style="left:25%">25</i><i style="left:50%">50</i><i style="left:75%">75</i><i style="left:100%">100%</i></span></div>
+          <div id="barRows"></div>
+        </div>
+        <p class="fine">Source: Cambridge International, June 2026 grade threshold tables. Overall thresholds as a percentage of the total mark; ranges cover every paper variant.</p>
+      </div>
     </div>
-    <div class="seg seg--sm" role="group" aria-label="Threshold level">
-      <button aria-pressed="true" data-t="O">O Level</button>
-      <button aria-pressed="false" data-t="A">A Level</button>
-      <i class="seg__thumb"></i>
-    </div>
-    <div class="bars surface" id="bars">
-      <div class="bars__legend"><span class="k k--astar">A*</span><span class="k k--a">A</span><span class="k k--c">C</span><span class="k k--z">Below C</span></div>
-      <div class="bars__head"><span></span><span class="bars__scale mono"><i style="left:0">0</i><i style="left:25%">25</i><i style="left:50%">50</i><i style="left:75%">75</i><i style="left:100%">100%</i></span></div>
-      <div id="barRows"></div>
-    </div>
-    <p class="fine">Source: Cambridge International, June 2026 grade threshold tables. Overall thresholds as a percentage of the total mark.</p>
   </div>
 </section>
 
 <!-- ============ TIMETABLE ============ -->
 <section class="tt wrap" id="timetable">
   <div class="sec-head">
-    <div>
-      <h2 class="h2">Find your class.</h2>
-    </div>
-    <p class="lede">Pick your level and the days that suit you. Seats are limited per room, so message us before you come in.</p>
+    <h2 class="h2">Find your class.</h2>
+    <p class="lede">Pick your level and the days that suit you. Seats are allotted per room, so reserve before you come in.</p>
   </div>
   <div class="tt-tools">
     <div class="seg" role="group" aria-label="Level">
@@ -270,65 +334,66 @@
       <i class="seg__thumb"></i>
     </div>
     <div class="days" role="group" aria-label="Days">
-      <button class="day is-on" data-d="ALL">All days</button>
-      <button class="day" data-d="MW">Mon · Wed</button>
-      <button class="day" data-d="TT">Tue · Thu</button>
-      <button class="day" data-d="FS">Fri · Sat</button>
-      <button class="day" data-d="ON">Online</button>
+      <button class="day is-on" data-d="ALL" aria-pressed="true">All days</button>
+      <button class="day" data-d="MW" aria-pressed="false">Mon · Wed</button>
+      <button class="day" data-d="TT" aria-pressed="false">Tue · Thu</button>
+      <button class="day" data-d="FS" aria-pressed="false">Fri · Sat</button>
+      <button class="day" data-d="ON" aria-pressed="false">Online</button>
     </div>
   </div>
-  <div class="tt-table surface" id="ttTable" role="table" aria-label="Class timetable"></div>
+  <div class="tt-table" id="ttTable" role="table" aria-label="Class timetable"></div>
+  <p class="fine">Times as published by The Classroom. Message the front desk to confirm before your first class.</p>
 </section>
 
-<!-- ============ FACULTY ============ -->
-<section class="faculty" id="faculty">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h2">The people behind the grades.</h2>
+<!-- ============ PAPER: FACULTY ============ -->
+<section class="faculty tint" id="faculty">
+  <div class="band-in">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2">The people behind<br>the grades.</h2>
+        <p class="lede">Heads of department and subject specialists who teach O Level, AS and A2 under one roof.</p>
       </div>
-      <p class="lede">Heads of department and subject specialists who teach O Level, AS and A2 under one roof.</p>
-    </div>
-    <div class="fac-grid">
-      <article class="fac surface"><div class="fac__mono">YA</div><span class="fac__code" aria-hidden="true">5054</span><h3>Sir Yawar Abbas</h3><p>Head of Physics</p><span class="fac__lvl mono">O · AS · A2</span></article>
-      <article class="fac surface"><div class="fac__mono">MA</div><span class="fac__code" aria-hidden="true">2210</span><h3>Sir Muhammad Ali Khan</h3><p>Head of Computer Science</p><span class="fac__lvl mono">O · AS · A2</span></article>
-      <article class="fac surface"><div class="fac__mono">RK</div><span class="fac__code" aria-hidden="true">5070</span><h3>Sir Rizwan Khan</h3><p>Chemistry specialist</p><span class="fac__lvl mono">O Level</span></article>
-      <article class="fac surface"><div class="fac__mono">AS</div><span class="fac__code" aria-hidden="true">2281</span><h3>Sir Abdul Sami</h3><p>Economics specialist</p><span class="fac__lvl mono">O · AS · A2</span></article>
-      <article class="fac surface"><div class="fac__mono">NZ</div><span class="fac__code" aria-hidden="true">7707</span><h3>Sir Nauman Zafar</h3><p>Accounting · professional accountant</p><span class="fac__lvl mono">O · AS · A2</span></article>
-      <article class="fac surface"><div class="fac__mono">AS</div><span class="fac__code" aria-hidden="true">9699</span><h3>Sir Abdullah Shahmeer</h3><p>Sociology specialist</p><span class="fac__lvl mono">AS · A2 · online</span></article>
-    </div>
-    <div class="roster">
-      <p class="roster__title">Also teaching this term</p>
-      <ul>
-        <li><b>Sir Farrukh Khan</b> Maths, Add Maths</li><li><b>Sir Hamza Furqan</b> Maths</li><li><b>Sir Moinuddin Ali</b> AS & A2 Maths</li><li><b>Sir Adnan Khan</b> AS & A2 Chemistry</li><li><b>Sir Omer Soni</b> Biology</li><li><b>Sir Azhar ul Hassan</b> Business</li><li><b>Sir Raza Hussain</b> English</li><li><b>Ms Ambreen Rahman</b> Pakistan Studies</li><li><b>Sir Ahmed ur Rehman</b> Pakistan Studies</li><li><b>Sir Shahid Ansari</b> Islamiyat</li><li><b>Sir Rafay Yaseen</b> Islamiyat</li><li><b>Sir Jameel Ansari</b> Urdu</li><li><b>Sir Rehan Rehman</b> Psychology</li><li><b>Sir Emjay</b> Psychology</li>
-      </ul>
+      <div class="fac-grid">
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">YA</div><span class="fac__code mono">5054 · 9702</span></div><h3>Sir Yawar Abbas</h3><p>Head of Physics</p><div class="fac__foot"><span class="mono">O · AS · A2</span><button class="btn btn--text btn--xs" data-book data-book-subject="Physics"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">MA</div><span class="fac__code mono">2210 · 9618</span></div><h3>Sir Muhammad Ali Khan</h3><p>Head of Computer Science</p><div class="fac__foot"><span class="mono">O · AS · A2</span><button class="btn btn--text btn--xs" data-book data-book-subject="Computer Science"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">RK</div><span class="fac__code mono">5070</span></div><h3>Sir Rizwan Khan</h3><p>Chemistry specialist</p><div class="fac__foot"><span class="mono">O Level</span><button class="btn btn--text btn--xs" data-book data-book-subject="Chemistry"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">AS</div><span class="fac__code mono">2281 · 9708</span></div><h3>Sir Abdul Sami</h3><p>Economics specialist</p><div class="fac__foot"><span class="mono">O · AS · A2</span><button class="btn btn--text btn--xs" data-book data-book-subject="Economics"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">NZ</div><span class="fac__code mono">7707 · 9706</span></div><h3>Sir Nauman Zafar</h3><p>Accounting · professional accountant</p><div class="fac__foot"><span class="mono">O · AS · A2</span><button class="btn btn--text btn--xs" data-book data-book-subject="Accounting"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+        <article class="fac card-in"><div class="fac__top"><div class="fac__mono">AS</div><span class="fac__code mono">9699</span></div><h3>Sir Abdullah Shahmeer</h3><p>Sociology specialist</p><div class="fac__foot"><span class="mono">AS · A2 · online</span><button class="btn btn--text btn--xs" data-book data-book-subject="Sociology"><span>Reserve</span><svg class="i"><use href="#i-arrow"/></svg></button></div></article>
+      </div>
+      <div class="roster">
+        <p class="roster__title">Also teaching this term</p>
+        <ul>
+          <li><b>Sir Farrukh Khan</b> Maths, Add Maths</li><li><b>Sir Hamza Furqan</b> Maths</li><li><b>Sir Moinuddin Ali</b> AS &amp; A2 Maths</li><li><b>Sir Adnan Khan</b> AS &amp; A2 Chemistry</li><li><b>Sir Omer Soni</b> Biology</li><li><b>Sir Azhar ul Hassan</b> Business</li><li><b>Sir Raza Hussain</b> English</li><li><b>Ms Ambreen Rahman</b> Pakistan Studies</li><li><b>Sir Ahmed ur Rehman</b> Pakistan Studies</li><li><b>Sir Shahid Ansari</b> Islamiyat</li><li><b>Sir Rafay Yaseen</b> Islamiyat</li><li><b>Sir Jameel Ansari</b> Urdu</li><li><b>Sir Rehan Rehman</b> Psychology</li><li><b>Sir Emjay</b> Psychology</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CALENDAR ============ -->
+<!-- ============ CALENDAR + COUNTDOWN ============ -->
 <section class="cal wrap" id="calendar">
-  <div class="sec-head">
+  <div class="cal__head">
     <div>
       <h2 class="h2">The year ahead.</h2>
+      <p class="lede">Key Cambridge dates every O and A Level family in Karachi plans around. June 2027 dates are estimates until Cambridge publishes the timetable.</p>
     </div>
-    <p class="lede">Key Cambridge dates every O and A Level family in Karachi plans around. June 2027 dates are estimates until Cambridge publishes the timetable.</p>
+    <div class="countdown" aria-live="off">
+      <div class="countdown__item"><span class="countdown__n mono" id="cdA">--</span><span class="countdown__l">days to AS &amp; A Level results</span></div>
+      <div class="countdown__item"><span class="countdown__n mono" id="cdO">--</span><span class="countdown__l">days to O Level results</span></div>
+    </div>
   </div>
   <ol class="timeline" id="timeline">
     <li class="tl is-now"><span class="tl__date mono">Oct – Nov 2026</span><h3>November series sits</h3><p>Resits, plus Pakistan Studies 2059 in November.</p></li>
-    <li class="tl"><span class="tl__date mono">7 Jan 2027</span><h3>AS & A Level results</h3><p>November 2026 series.</p></li>
+    <li class="tl"><span class="tl__date mono">7 Jan 2027</span><h3>AS &amp; A Level results</h3><p>November 2026 series.</p></li>
     <li class="tl"><span class="tl__date mono">14 Jan 2027</span><h3>O Level results</h3><p>November 2026 series.</p></li>
     <li class="tl tl--est"><span class="tl__date mono">c. Feb 2027</span><h3>June entries close</h3><p>Private candidates register through the British Council.</p></li>
     <li class="tl tl--est"><span class="tl__date mono">Apr – Jun 2027</span><h3>June 2027 exams</h3><p>The main series for most candidates.</p></li>
     <li class="tl tl--est"><span class="tl__date mono">Mid Aug 2027</span><h3>June results</h3><p>Then IBCC equivalence for Matric and Inter.</p></li>
   </ol>
-</section>
-
-<!-- ============ IBCC ============ -->
-<section class="ibcc wrap">
   <div class="ibcc__card surface">
     <div class="ibcc__copy">
-      <h2 class="h3">From O Level to Matric, A Level to Inter.</h2>
+      <h3 class="h3">From O Level to Matric, A Level to Inter.</h3>
       <p>Matric equivalence needs eight O Level subjects at grade E or above, with Maths, English, Urdu, Islamiyat and Pakistan Studies compulsory. Inter needs three relevant A Levels: Physics, Chemistry and Maths for Pre-Engineering; add Biology for Pre-Medical.</p>
     </div>
     <div class="ibcc__marks" aria-label="IBCC marks awarded per O Level grade">
@@ -337,6 +402,23 @@
   </div>
 </section>
 
+<!-- ============ FAQ ============ -->
+<section class="faq-sec tint" id="faq"><div class="faq wrap">
+  <div class="faq__side">
+    <h2 class="h2">Questions parents ask.</h2>
+    <p class="lede">Anything else, the front desk answers on WhatsApp during class hours.</p>
+    <a class="btn btn--outline" href="https://wa.me/923111111827" rel="noopener"><svg class="i"><use href="#i-wa"/></svg><span>Ask on WhatsApp</span></a>
+  </div>
+  <div class="faq__list">
+    <details class="qa" name="faq" open><summary><span>Which exam board do you teach?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Cambridge International (CAIE): O Level, AS Level and A2 Level. Every course follows the syllabus code that applies to the 2027 exams, listed in the syllabus library above.</p></div></details>
+    <details class="qa" name="faq"><summary><span>When are classes held?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Monday to Saturday, in the afternoon and evening after school. Most sciences run as Friday–Saturday blocks; commerce subjects run on Tuesday–Thursday. Sunday is closed on campus.</p></div></details>
+    <details class="qa" name="faq"><summary><span>Do you offer online classes?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Yes. AS and A2 Psychology and Sociology are taught online. Every other subject is taught on campus.</p></div></details>
+    <details class="qa" name="faq"><summary><span>Can you help with university entry tests?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Yes. We prepare students for the IBA, IOBM, LUMS, NUST, GIKI and FAST admission tests, alongside application help, personal statements and interview practice.</p></div></details>
+    <details class="qa" name="faq"><summary><span>What is the student portal?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Enrolled students sign in at the-classroom.learn360lms.com for recorded lectures, online tests and class material. Your login is issued when you enrol.</p></div></details>
+    <details class="qa" name="faq"><summary><span>How do I reserve a seat?</span><i aria-hidden="true"></i></summary><div class="qa__a"><p>Use Reserve a seat on this page. Pick your level and subjects, and your request opens in WhatsApp with the front desk, who confirm your room and timing.</p></div></details>
+  </div>
+</div></section>
+
 <!-- ============ VISIT ============ -->
 <section class="visit wrap" id="visit">
   <div class="visit__grid">
@@ -344,14 +426,14 @@
       <h2 class="h2">Come see a class.</h2>
       <p class="lede">Two plots from the Block I roundabout. Drop in Monday to Saturday, or message us and we’ll set a time with your subject teacher.</p>
       <dl class="contact">
-        <div><dt>Campus</dt><dd>Plot C-22, Block I, North Nazimabad, Karachi 74700</dd></div>
-        <div><dt>Phone</dt><dd><a href="tel:+923111111827" class="mono">03-111-111-827</a></dd></div>
-        <div><dt>Email</dt><dd><a href="mailto:info@theclassroom.pk">info@theclassroom.pk</a></dd></div>
-        <div><dt>Hours</dt><dd>Monday to Saturday · Sunday closed</dd></div>
+        <div><dt><svg class="i"><use href="#i-pin"/></svg>Campus</dt><dd>Plot C-22, Block I, North Nazimabad, Karachi 74700</dd></div>
+        <div><dt><svg class="i"><use href="#i-phone"/></svg>Phone</dt><dd><a href="tel:+923111111827" class="mono">03-111-111-827</a></dd></div>
+        <div><dt><svg class="i"><use href="#i-wa"/></svg>Email</dt><dd><a href="mailto:info@theclassroom.pk">info@theclassroom.pk</a></dd></div>
+        <div><dt><svg class="i"><use href="#i-clock"/></svg>Hours</dt><dd>Monday to Saturday · Sunday closed <span class="open-now" id="openNow"></span></dd></div>
       </dl>
       <div class="visit__actions">
-        <a class="btn btn--red magnetic" href="https://wa.me/923111111827" rel="noopener"><span>Message on WhatsApp</span></a>
-        <a class="btn btn--glass" href="https://www.google.com/maps/search/?api=1&query=24.9441,67.0463" rel="noopener"><span>Open in Google Maps</span></a>
+        <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&destination=24.9441,67.0463" rel="noopener"><svg class="i"><use href="#i-pin"/></svg><span>Get directions</span></a>
+        <a class="btn btn--outline" href="tel:+923111111827"><svg class="i"><use href="#i-phone"/></svg><span>Call the desk</span></a>
       </div>
     </div>
     <a class="map surface" data-cursor="Map" href="https://www.google.com/maps/search/?api=1&query=24.9441,67.0463" rel="noopener" aria-label="Open The Classroom location in Google Maps">
@@ -364,56 +446,176 @@
           <rect x="160" y="105" width="60" height="70" rx="4"/><rect x="265" y="100" width="55" height="75" rx="4"/><rect x="160" y="200" width="60" height="60" rx="4"/><rect x="265" y="195" width="58" height="62" rx="4"/>
         </g>
         <text x="20" y="40" class="map__label">BLOCK I · NORTH NAZIMABAD</text>
-        <text x="370" y="350" class="map__label">BLOCK H</text>
         <g class="map__pin" transform="translate(290 150)">
           <circle r="36" class="pulse"/><circle r="36" class="pulse pulse--2"/>
           <circle r="12" class="core"/>
         </g>
       </svg>
-      <div class="map__tag glass-strong"><b>The Classroom</b><span class="mono">24.9441° N, 67.0463° E</span></div>
+      <div class="map__tag"><b>The Classroom</b><span class="mono">24.9441° N, 67.0463° E</span></div>
     </a>
   </div>
 </section>
 
+<!-- ============ CTA BAND ============ -->
+<section class="band" aria-labelledby="bandTitle">
+  <div class="band__in wrap">
+    <img class="band__crest" src="assets/img/crest.webp" width="375" height="391" alt="" aria-hidden="true" loading="lazy">
+    <div class="band__copy">
+      <h2 class="band__title" id="bandTitle">Your seat. Your room.<br>Your teacher.</h2>
+      <p>Seats are allotted per room each term. Tell us your level and subjects and the front desk confirms your timing.</p>
+    </div>
+    <div class="band__actions">
+      <button class="btn btn--light btn--lg" data-book><span>Reserve a seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
+      <a class="btn btn--outline-light btn--lg" href="tel:+923111111827"><svg class="i"><use href="#i-phone"/></svg><span class="mono">03-111-111-827</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER ============ -->
-<footer class="foot">
+<footer class="foot invert">
   <div class="wrap">
-    <p class="foot__motto" aria-label="Ad Altiora Tendo">Ad Altiora Tendo</p>
+    <div class="foot__mark" aria-hidden="true"><span class="fm-o">CLASSROOM</span><span class="fm-f">CLASSROOM</span></div>
+    <p class="foot__motto">Ad Altiora Tendo · I strive toward higher things</p>
     <div class="foot__row">
       <div class="foot__brand">
         <img src="assets/img/crest.webp" width="375" height="391" alt="The Classroom crest" loading="lazy">
         <p><b>The Classroom</b><br>O Level · AS · A2 Academy<br>Plot C-22, Block I, North Nazimabad</p>
       </div>
       <nav class="foot__nav" aria-label="Footer">
-        <a href="#programs">Programs</a><a href="#syllabus">Syllabus</a><a href="#timetable">Timetable</a><a href="#thresholds">Thresholds</a><a href="#faculty">Faculty</a><a href="https://the-classroom.learn360lms.com" rel="noopener">Student portal</a>
+        <a href="#programs">Programs</a><a href="#syllabus">Syllabus</a><a href="#grades">Grade calculator</a><a href="#timetable">Timetable</a><a href="#faculty">Faculty</a><a href="#faq">FAQ</a><a href="https://the-classroom.learn360lms.com" rel="noopener">Student portal</a>
       </nav>
       <div class="foot__social">
         <a href="https://www.facebook.com/search/top?q=The%20Classroom%20Karachi" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v6h4v-6h3l1-4h-4V8z"/></svg></a>
         <a href="https://www.instagram.com/theclassroomnorth/" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".8"/></svg></a>
-        <a href="https://wa.me/923111111827" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg></a>
+        <a href="https://wa.me/923111111827" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></a>
       </div>
     </div>
     <div class="foot__base">
       <span>© <span id="yr">2026</span> The Classroom (TCR). All rights reserved.</span>
-      <span>Cambridge syllabus codes and thresholds are © Cambridge University Press & Assessment.</span>
+      <span>Cambridge syllabus codes and thresholds are © Cambridge University Press &amp; Assessment.</span>
     </div>
-
     <a class="nexlyr" href="https://nexlyr.solutions" rel="noopener" aria-label="Website by Nexlyr Solutions">
       <img src="assets/img/nexlyr-logo.svg" width="631" height="1011" alt="" class="nexlyr__mark" loading="lazy">
-      <span class="nexlyr__txt"><small>Designed & built by</small><b>NEXLYR</b></span>
+      <span class="nexlyr__txt"><small>Designed &amp; built by</small><b>NEXLYR</b></span>
       <span class="nexlyr__btn">Connect</span>
     </a>
   </div>
 </footer>
 </main>
 
+<!-- ============ OVERLAYS ============ -->
+
+<!-- Syllabus detail sheet -->
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__scrim" data-close></div>
+  <div class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <button class="sheet__close iconbtn" data-close aria-label="Close"><svg class="i"><use href="#i-close"/></svg></button>
+    <div id="sheetBody"></div>
+  </div>
+</div>
+
+<!-- Reserve-a-seat modal -->
+<div class="modal" id="book" hidden>
+  <div class="modal__scrim" data-book-close></div>
+  <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <button class="modal__close iconbtn" data-book-close aria-label="Close"><svg class="i"><use href="#i-close"/></svg></button>
+    <div class="modal__aside" aria-hidden="true">
+      <img src="assets/img/crest.webp" width="375" height="391" alt="" loading="lazy">
+      <p class="modal__motto">Ad Altiora Tendo</p>
+      <ol class="modal__steps mono"><li class="is-on">Level</li><li>Subjects</li><li>Details</li></ol>
+    </div>
+    <form class="modal__body" id="bookForm" novalidate>
+      <p class="modal__k mono" id="bookStepLabel">Step 1 of 3</p>
+      <h2 class="modal__title" id="bookTitle">Reserve a seat</h2>
+
+      <fieldset class="step is-on" data-step="1">
+        <legend>Which level are you studying?</legend>
+        <div class="choice-grid">
+          <label class="choice"><input type="radio" name="level" value="O"><span><b>O Level</b><small>16 classes · on campus</small></span></label>
+          <label class="choice"><input type="radio" name="level" value="AS"><span><b>AS Level</b><small>11 classes · campus + online</small></span></label>
+          <label class="choice"><input type="radio" name="level" value="A2"><span><b>A2 Level</b><small>11 classes · campus + online</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" data-step="2">
+        <legend>Pick your subjects <small id="subjCount" class="mono"></small></legend>
+        <div class="chips" id="subjChips"></div>
+      </fieldset>
+
+      <fieldset class="step" data-step="3">
+        <legend>Where should the front desk reach you?</legend>
+        <div class="form-grid">
+          <div class="field"><label for="fName">Student name</label><input id="fName" name="name" autocomplete="name" required placeholder="e.g. Ayesha Khan"><p class="field__err">Please add the student’s name.</p></div>
+          <div class="field"><label for="fPhone">Phone or WhatsApp</label><input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="03xx xxxxxxx"><p class="field__err">Please add a Pakistani mobile number.</p></div>
+          <div class="field field--full"><label for="fSchool">School <span class="opt">optional</span></label><input id="fSchool" name="school" placeholder="Your current school"></div>
+        </div>
+        <div class="summary" id="bookSummary"></div>
+      </fieldset>
+
+      <div class="modal__nav">
+        <button type="button" class="btn btn--quiet" id="bookBack" hidden><span>Back</span></button>
+        <p class="modal__hint" id="bookHint">Choose one to continue.</p>
+        <button type="button" class="btn btn--primary" id="bookNext" disabled><span>Continue</span><svg class="i"><use href="#i-arrow"/></svg></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Side admissions card -->
+<aside class="promo" id="promo" hidden aria-label="Admissions">
+  <button class="promo__x iconbtn iconbtn--sm" aria-label="Dismiss"><svg class="i"><use href="#i-close"/></svg></button>
+  <div class="promo__media"><img src="assets/img/crest.webp" width="375" height="391" alt="" loading="lazy"><span class="mono">2026–27</span></div>
+  <div class="promo__copy">
+    <p class="promo__k mono">Now reserving</p>
+    <p class="promo__t">Seats for the June 2027 exams</p>
+    <p class="promo__p">Rooms fill subject by subject. Reserve yours in under a minute.</p>
+    <button class="btn btn--primary btn--sm" data-book><span>Reserve a seat</span><svg class="i"><use href="#i-arrow"/></svg></button>
+  </div>
+</aside>
+
+<!-- Command palette -->
+<div class="palette" id="palette" hidden>
+  <div class="palette__scrim" data-palette-close></div>
+  <div class="palette__card" role="dialog" aria-modal="true" aria-label="Search">
+    <label class="palette__input"><svg class="i"><use href="#i-search"/></svg><input id="palInput" placeholder="Search subjects, codes, teachers or sections" autocomplete="off"><kbd class="mono">esc</kbd></label>
+    <ul class="palette__list" id="palList" role="listbox"></ul>
+    <p class="palette__foot mono"><span>↑↓ to move</span><span>↵ to open</span></p>
+  </div>
+</div>
+
+<!-- Ask TCR: instant answers from the timetable + syllabus -->
+<section class="bot" id="bot" hidden aria-label="Ask The Classroom">
+  <header class="bot__h">
+    <img src="assets/img/crest.webp" width="375" height="391" alt="">
+    <div><b>Ask TCR</b><small><i class="live"></i>Instant answers from the timetable</small></div>
+    <button class="iconbtn iconbtn--sm" data-bot-close aria-label="Close chat"><svg class="i"><use href="#i-close"/></svg></button>
+  </header>
+  <div class="bot__log" id="botLog" aria-live="polite"></div>
+  <div class="bot__chips" id="botChips"></div>
+  <form class="bot__f" id="botForm"><input id="botIn" placeholder="Try “Physics timings” or “5054”" autocomplete="off" aria-label="Your question"><button class="iconbtn iconbtn--send" aria-label="Send"><svg class="i"><use href="#i-send"/></svg></button></form>
+</section>
+
+<div class="dock" aria-label="Quick actions">
+  <button class="dock__top" aria-label="Back to top"><svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><circle class="ring__p" cx="24" cy="24" r="21" pathLength="1"/></svg><svg class="i"><use href="#i-up"/></svg></button>
+  <a class="dock__wa" href="https://wa.me/923111111827" rel="noopener" aria-label="Chat on WhatsApp"><svg class="i"><use href="#i-wa"/></svg></a>
+  <button class="dock__ask" data-bot aria-controls="bot" aria-expanded="false"><img src="assets/img/crest.webp" width="375" height="391" alt=""><span>Ask TCR</span></button>
+</div>
+
+<nav class="mbar" aria-label="Quick actions">
+  <a href="tel:+923111111827"><svg class="i"><use href="#i-phone"/></svg><span>Call</span></a>
+  <a href="#timetable"><svg class="i"><use href="#i-cal"/></svg><span>Classes</span></a>
+  <button class="mbar__cta" data-book><svg class="i"><use href="#i-plus"/></svg><span>Reserve</span></button>
+  <button data-bot aria-controls="bot"><svg class="i"><use href="#i-chat"/></svg><span>Ask</span></button>
+  <a href="https://wa.me/923111111827" rel="noopener"><svg class="i"><use href="#i-wa"/></svg><span>WhatsApp</span></a>
+</nav>
+
 <div class="cursor" aria-hidden="true"><i></i><b class="cursor__label"></b></div>
-<a class="wa-float magnetic" href="https://wa.me/923111111827" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2z"/></svg></a>
 
 <script src="assets/js/vendor/lenis.min.js" defer></script>
 <script src="assets/js/vendor/gsap.min.js" defer></script>
 <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/data.js" defer></script>
+<script src="assets/js/gl.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

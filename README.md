@@ -10,16 +10,25 @@ Static HTML/CSS/JS, no build step. Every asset is a local file in this repo (fon
 index.html              page markup, SEO meta, schema.org data
 assets/css/style.css    design tokens + all styles
 assets/js/data.js       syllabus library, timetable, June 2026 thresholds  ← edit content here
-assets/js/main.js       interactions (smooth scroll, explorer, timetable, scroll scenes)
+assets/js/main.js       interactions (preloader, themes, explorer, booking, chat, scroll scenes)
+assets/js/gl.js         WebGL crest particles
 assets/js/vendor/       Lenis 1.3, GSAP 3.15 + ScrollTrigger
 assets/fonts/           Fraunces, Hanken Grotesk, JetBrains Mono (variable woff2)
 assets/img/             crest, favicons, Nexlyr mark
 vercel.json             long-term caching for /assets
 ```
 
-## Preloader
+## Features
 
-The crest intro (grade reel E → A*, double curtain) plays **once per browser session**, skips for reduced-motion users and on click or keypress, and has a CSS failsafe that hides it after 5 s if scripts fail. To replay it, clear `sessionStorage['tcr-intro']`.
+- **Preloader** in the Verzish / Sir Sohail style: CLASSROOM rises, fills crimson from below, then the camera dives through the L. Once per session; skips on click/keypress and for reduced-motion users. Replay by clearing `sessionStorage['tcr-seen']`.
+- **Two themes**: Light (white & red, default) and Dark, toggled in the nav / menu and remembered in `localStorage['tcr-theme']`.
+- **3D crest particles** (`assets/js/gl.js`): a hand-written WebGL point field (no three.js) that morphs between the crest's four quarters, atom, globe, open book and cap, around the hero crest, then drifts behind Programs, Syllabus and the Calendar.
+- **Reserve a seat**: 3-step pop-up (level → subjects → details) that opens a prefilled WhatsApp message to the front desk. Every timetable row, faculty card and syllabus sheet can prefill it.
+- **Ask TCR**: compact chat panel that answers instantly from `data.js` (subject timings, teacher classes, syllabus codes, A* thresholds, results dates, location, portal). Rule-based, no external AI.
+- **Grade calculator** using Cambridge June 2026 thresholds, with a 3D flip grade card.
+- **⌘K search** across sections, syllabus codes and teachers; `/` focuses the syllabus search.
+- **Side admissions card** (slides in once, dismiss remembered for 3 days) and a results countdown bar.
+- Mobile: full-width bottom action bar, small dropdown menu, bottom-sheet pop-ups.
 
 ## Updating content
 
