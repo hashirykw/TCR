@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.theclassroom.pk/sitemap.xml
+Sitemap: https://tcr.nexlyr.solutions/sitemap.xml
