@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:IS;src:url(../assets/fonts/instrument-serif.woff2)}
+@font-face{font-family:G;src:url(../assets/fonts/geist.woff2);font-weight:400 800}
+@font-face{font-family:GM;src:url(../assets/fonts/geist-mono.woff2);font-weight:400 600}
+*{margin:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;background:radial-gradient(80% 90% at 50% 30%,#fffdfa,#f6efe6 75%);font-family:G;color:#1b2033;position:relative}
+.grid{position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(27,32,51,.05) 1px,transparent 1px);background-size:100px 100%;background-position:50px 0}
+.frame{position:absolute;inset:22px;border:1px solid rgba(178,34,52,.35);border-radius:22px}
+.corner{position:absolute;font:500 17px/1 G;color:#5b6070}
+.tl{top:50px;left:60px;display:flex;align-items:center;gap:14px;font:24px/1 IS;color:#a3202f}
+.tl i{width:36px;height:1px;background:currentColor}
+.tr{top:54px;right:60px}
+.bl{bottom:50px;left:60px;font:500 18px/1 GM;color:#1b2033}
+.br{bottom:50px;right:60px;font:500 18px/1 GM;color:#a3202f}
+.arch{position:absolute;left:50%;top:62px;width:236px;height:262px;transform:translateX(-50%);border-radius:999px 999px 18px 18px;background:radial-gradient(90% 70% at 50% 18%,#d0303f,#b21f2f 45%,#6e1420);box-shadow:0 0 0 7px #fffdfa,0 0 0 8px rgba(178,34,52,.35),0 30px 50px -24px rgba(90,20,30,.55);display:grid;place-items:center}
+.disc{width:184px;height:184px;margin-top:26px;border-radius:50%;background:radial-gradient(circle at 34% 26%,#fff,#f4ece2 72%);box-shadow:0 18px 30px -14px rgba(40,5,10,.6),inset 0 0 0 1px rgba(27,32,51,.08);display:grid;place-items:center}
+.arch img{width:120px;filter:drop-shadow(0 8px 12px rgba(110,20,32,.35))}
+.plate{position:absolute;width:300px;height:300px;left:50%;top:40px;transform:translateX(-50%);color:#b21f2f;opacity:.12}
+h1{position:absolute;left:0;right:0;top:342px;text-align:center;font:400 104px/1 IS;letter-spacing:-.02em}
+p{position:absolute;left:0;right:0;top:456px;text-align:center;font:400 24px/1.4 G;color:#3a4052}
+p b{color:#a3202f;font-weight:600}
+</style></head><body>
+<div class="grid"></div><div class="frame"></div>
+<div class="corner tl"><i></i>Ad Altiora Tendo</div>
+<div class="corner tr">Cambridge International</div>
+<div class="arch"><div class="disc"><img src="../assets/img/crest.webp" alt=""></div></div>
+<h1>The Classroom</h1>
+<p><b>O Level · AS · A2</b> academy<br>Block I, North Nazimabad, Karachi</p>
+<div class="corner bl">tcr.nexlyr.solutions</div>
+<div class="corner br">03-111-111-827</div>
+</body></html>
