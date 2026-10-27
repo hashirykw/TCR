@@ -1112,3 +1112,22 @@ body.is-locked .cursor.has-label i{transform:none;background:transparent;border-
   .mbar__cta{margin-top:-18px}
   .mbar__cta .i{padding:11px;border-width:3px;border-radius:16px}
 }
+/* ---------- compact footer on phones (~30% of desktop-style stack) ---------- */
+@media (max-width:600px){
+  .foot{padding:16px 0 calc(10px + env(safe-area-inset-bottom,0px))}
+  .foot__mark,.foot__motto,.foot__nav{display:none}
+  .foot__row{grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:0 0 10px;border-top:0}
+  .foot__brand{gap:10px}
+  .foot__brand img{width:34px}
+  .foot__brand p{font-size:11px;line-height:1.35;white-space:nowrap}
+  .foot__brand b{font-size:1.15rem}
+  .foot__social{gap:4px}
+  .foot__social a{width:30px;height:30px}
+  .foot__social svg{width:15px;height:15px}
+  .foot__base{padding:8px 0;gap:0 10px;font-size:10px;line-height:1.4}
+  .nexlyr{margin-top:4px;padding:7px 7px 7px 12px;gap:10px;max-width:none}
+  .nexlyr__mark{width:16px}
+  .nexlyr__txt small{font-size:9px}
+  .nexlyr__txt b{font-size:.82rem}
+  .nexlyr__btn{height:30px;padding:0 13px;font-size:12.5px}
+}
