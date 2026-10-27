@@ -673,7 +673,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
 
 /* ================= FOOTER ================= */
 .foot{background:radial-gradient(70% 50% at 50% 0%,oklch(32% .11 24),transparent 70%),var(--oxblood-2);padding:var(--space-3xl) 0 calc(var(--space-xl) + env(safe-area-inset-bottom,0px))}
-.foot__mark{position:relative;font-family:var(--font-body);font-weight:800;font-size:clamp(3.2rem,.6rem + 13vw,15.5rem);line-height:.82;letter-spacing:-.055em;text-align:center;user-select:none}
+.foot__mark{position:relative;font-family:var(--font-body);font-weight:800;font-size:clamp(3rem,14.4vw,15rem);line-height:.82;letter-spacing:-.055em;white-space:nowrap;text-align:center;user-select:none}
 .fm-o{display:block;color:transparent;-webkit-text-stroke:1px oklch(100% 0 0 / .18)}
 .fm-f{position:absolute;inset:0;display:block;color:var(--crimson-hi);clip-path:inset(calc(100% - var(--fp,0) * 100%) 0 0 0)}
 .foot__motto{text-align:center;font-family:var(--font-body);font-size:13px;font-weight:500;letter-spacing:-.005em;color:var(--ink-3);margin:var(--space-lg) 0 var(--space-2xl)}
@@ -1062,4 +1062,53 @@ body.is-locked .cursor.has-label i{transform:none;background:transparent;border-
 @media (max-width:900px){
   .tt-table.is-clipped .tr:nth-child(n+8){display:none}
   .tt-more{display:flex;width:100%;margin-top:10px}
+}
+
+/* ---------- phone layout pass ---------- */
+@media (max-width:600px){
+  .hero{padding-top:128px}
+  .hero__motto{font-size:1.15rem}
+  .hero__motto .dot{width:28px}
+  .hero__lede{font-size:1.02rem}
+  .hero__actions{display:grid;grid-template-columns:1.1fr 1fr;gap:8px;margin-top:var(--space-lg)}
+  .hero__actions .btn{width:auto;--h:52px;padding:0 12px;font-size:14.5px}
+  .hero__actions .btn--outline .i{display:none}
+  .find{margin-top:var(--space-md)}
+  .find__lv button{margin-right:8px}
+  /* programs: no giant numerals fighting the copy */
+  .prog{padding:22px}
+  .prog__big{display:none}
+  .prog__plate{width:150px;height:150px;right:-24px;top:-22px}
+  .prog h3{margin-top:44px;font-size:2.4rem}
+  .prog__foot{padding-top:12px}
+  /* threshold bars: tighter ledger */
+  .bars{padding:16px 14px}
+  .brow{padding:8px 0;gap:6px}
+  .brow__name .nm{font-size:14px}
+  .track{height:10px;border-radius:5px}
+  .bars__head{padding-bottom:4px}
+  .calc__controls,.calc__result{padding:var(--space-lg)}
+  .calc{gap:12px;margin-bottom:var(--space-2xl)}
+  /* day filter fits the width, no clipped labels */
+  .days{overflow:visible}
+  .day{flex:1 1 0;padding:0 4px;font-size:12.5px;min-width:0}
+  /* faculty cards: name, role, action — no dead space */
+  .fac__body>p{margin-bottom:10px;min-height:2.7em}
+  /* timeline and countdown */
+  .countdown__n{font-size:3.4rem}
+  .countdown__item{padding:16px}
+  .ibcc__card{padding:var(--space-lg);gap:var(--space-lg)}
+  .ibcc__marks{height:170px}
+  /* visit + footer */
+  .map{aspect-ratio:4/3}
+  .visit__actions{display:grid;grid-template-columns:1fr 1fr}
+  .visit__actions .btn{padding:0 10px}
+  .foot__motto{margin:var(--space-md) 0 var(--space-xl);font-size:12px}
+  .foot__nav{gap:8px 18px}
+  .faq__side .h2{font-size:2.6rem}
+  .qa summary{font-size:1.3rem;padding:16px 18px}
+  .qa__a{padding:0 18px 16px}
+  /* mobile bar: calmer reserve button */
+  .mbar__cta{margin-top:-18px}
+  .mbar__cta .i{padding:11px;border-width:3px;border-radius:16px}
 }
