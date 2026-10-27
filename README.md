@@ -14,7 +14,7 @@ assets/js/main.js       interactions (preloader, themes, explorer, booking, chat
 assets/js/gl.js         WebGL crest particles
 tools/bump.mjs          stamps ?v=<hash> on CSS/JS links (run after edits)
 assets/js/vendor/       Lenis 1.3, GSAP 3.15 + ScrollTrigger
-assets/fonts/           Fraunces, Hanken Grotesk, JetBrains Mono (variable woff2)
+assets/fonts/           Instrument Serif, Geist, Geist Mono (subset woff2, 46 KB total)
 assets/img/             crest, favicons, Nexlyr mark
 vercel.json             long-term caching for /assets
 ```

@@ -33,7 +33,7 @@
     else { const raf = tm => { lenis.raf(tm); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
     if (ST) lenis.on('scroll', ST.update);
   }
-  const lock = on => { if (lenis) on ? lenis.stop() : lenis.start(); document.body.style.overflow = on ? 'hidden' : ''; };
+  const lock = on => { if (lenis) on ? lenis.stop() : lenis.start(); document.body.style.overflow = on ? 'hidden' : ''; document.body.classList.toggle('is-locked', !!on); };
   const scrollTo = el => lenis ? lenis.scrollTo(el, { offset: -90, duration: 1.3 }) : el.scrollIntoView({ behavior: RM ? 'auto' : 'smooth' });
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a) return;
@@ -85,7 +85,7 @@
     G.set(hw, { yPercent: 112 }); G.set(hb, { y: 34, autoAlpha: 0 });
     const st = { lv: 0, ps: 1.32 };
     const paint = () => { gold.style.setProperty('--lv', st.lv.toFixed(2)); gold.style.setProperty('--ps', st.ps.toFixed(3)); fill.querySelector('.ldx-crest').style.setProperty('--lv', st.lv.toFixed(2)); N.textContent = String(Math.round(st.lv)).padStart(3, '0'); };
-    const fonts = Promise.race([document.fonts && document.fonts.load ? document.fonts.load('800 100px "Fraunces"') : Promise.resolve(), new Promise(r => setTimeout(r, 450))]);
+    const fonts = Promise.race([document.fonts && document.fonts.load ? document.fonts.load('800 100px "Geist"') : Promise.resolve(), new Promise(r => setTimeout(r, 450))]);
     const frames = new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     performance.mark('tcr:loader-wait');
     return Promise.all([fonts, frames]).then(() => new Promise(res => {
@@ -111,6 +111,7 @@
         .to(hb, { y: 0, autoAlpha: 1, duration: .9, ease: E, stagger: .05, clearProps: 'transform,opacity,visibility' }, 1.24)
         .to(['.nav', '.dock', '.mbar', '.announce'], { autoAlpha: 1, duration: .6, ease: 'power2.out', clearProps: 'opacity,visibility' }, 1.26)
         .set(ink, { autoAlpha: 0 }, 1.7);
+      tl.timeScale(1.28);
       fill.addEventListener('click', skip); ink.addEventListener('click', skip); addEventListener('keydown', skip, { once: true });
     }));
   }
@@ -177,14 +178,21 @@
 
   /* ================= SYLLABUS EXPLORER ================= */
   const grid = $('#sylGrid'), search = $('#sylSearch'), sylSeg = $('.syl-tools .seg'); let sylLvl = 'O';
+  const ICO = 'assets/img/icons.svg#';
+  const subjIcon = n => { n = n.toLowerCase();
+    return /additional|add maths/.test(n) ? 's-addmath' : /math/.test(n) ? 's-math' : /physics/.test(n) ? 's-physics' : /chem/.test(n) ? 's-chem' : /bio/.test(n) ? 's-bio'
+      : /computer/.test(n) ? 's-cs' : /account/.test(n) ? 's-acc' : /business/.test(n) ? 's-bus' : /econ/.test(n) ? 's-eco' : /pakistan/.test(n) ? 's-pak'
+      : /islam/.test(n) ? 's-isl' : /urdu/.test(n) ? 's-urdu' : /english/.test(n) ? 's-eng' : /psych/.test(n) ? 's-psy' : /socio/.test(n) ? 's-soc' : 's-uni'; };
+  const ic = (id, cls = 'i') => `<svg class="${cls}" aria-hidden="true"><use href="${ICO}${id}"/></svg>`;
   function renderSyl() {
     const q = search.value.trim().toLowerCase();
     const list = D.syllabus.filter(s => (q ? true : s.lvl === sylLvl) && (!q || (s.code + ' ' + s.name + ' ' + s.teacher).toLowerCase().includes(q)));
     grid.innerHTML = list.length ? list.map((s, i) => `
       <button class="syl enter" style="animation-delay:${Math.min(i, 14) * 35}ms" data-code="${s.code}" data-cursor="Open" aria-label="${s.code} ${esc(s.name)}, open papers and topics">
         ${s.isNew ? '<span class="syl__new">NEW 2027</span>' : ''}
-        <span class="syl__code">${s.code}</span><span class="syl__name">${esc(s.name)}</span>
-        <span class="syl__who">${s.lvl === 'O' ? 'O Level' : 'AS & A Level'} · ${esc(s.teacher)}</span>
+        <span class="syl__ic">${ic(subjIcon(s.name))}</span>
+        <span class="syl__code">${s.code} · ${s.lvl === 'O' ? 'O Level' : 'AS & A'}</span><span class="syl__name">${esc(s.name)}</span>
+        <span class="syl__meta"><span class="syl__who">${esc(s.teacher)}</span><span class="syl__go">${ic('arrow-ur')}</span></span>
       </button>`).join('') : `<p class="syl-empty">No subject matches “${esc(search.value)}”. Try a code like 5054.</p>`;
   }
   function setSylLevel(l) { sylLvl = l; search.value = ''; segSelect(sylSeg, $(`[data-lvl="${l}"]`, sylSeg)); renderSyl(); }
@@ -205,7 +213,7 @@
       <p class="sh-h">Topics</p>
       <ol class="topics">${s.topics.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
       ${s.note ? `<p class="sh-note">${esc(s.note)}</p>` : ''}
-      <div class="sh-actions"><button class="btn btn--primary" data-book data-book-level="${s.lvl === 'O' ? 'O' : 'AS'}" data-book-subject="${esc(s.name.replace(/ \(.*\)/, '').replace(' (Syllabus D)', ''))}"><span>Reserve this class</span><svg class="i"><use href="#i-arrow"/></svg></button><button class="btn btn--outline" data-close><span>Close</span></button></div>`;
+      <div class="sh-actions"><button class="btn btn--primary" data-book data-book-level="${s.lvl === 'O' ? 'O' : 'AS'}" data-book-subject="${esc(s.name.replace(/ \(.*\)/, '').replace(' (Syllabus D)', ''))}"><span>Reserve this class</span><svg class="i"><use href="assets/img/icons.svg#arrow"/></svg></button><button class="btn btn--outline" data-close><span>Close</span></button></div>`;
     sheet.hidden = false; sheet.classList.remove('closing'); lock(true);
     $('.sheet__close', sheet).focus();
   }
@@ -269,7 +277,7 @@
     const rows = D.timetable[ttLvl].filter(r => ttDay === 'ALL' || r[2] === ttDay || (ttDay === 'ON' && r[4] === 'Online'));
     tt.innerHTML = `<div class="tr tr--head" role="row"><span role="columnheader">Subject</span><span role="columnheader">Teacher</span><span role="columnheader">Days</span><span role="columnheader">Time</span><span role="columnheader">Room</span><span role="columnheader"><span class="sr">Action</span></span></div>` +
       (rows.length ? rows.map((r, i) => `<div class="tr enter" role="row" style="animation-delay:${i * 28}ms">
-        <span class="subj" role="cell">${r[0]}</span><span class="who" role="cell">${r[1]}</span>
+        <span class="subj" role="cell">${ic(subjIcon(r[0]))}${r[0]}</span><span class="who" role="cell">${r[1]}</span>
         <span class="pillcell" role="cell"><span class="pill ${r[4] === 'Online' ? 'pill--on' : ''}">${dayLabel[r[2]]}</span></span>
         <span class="when" role="cell">${r[3].includes(' · ') ? r[3].split(' · ').map(x => x.replace(/^(Fri|Sat) /, '<em>$1</em>')).join('<br>') : r[3]}</span>
         <span class="room" role="cell">${r[4]}</span>
@@ -546,7 +554,6 @@
     document.addEventListener('pointerleave', () => cur.classList.add('is-out'));
     (function loop() { cx += (tx - cx) * .3; cy += (ty - cy) * .3; cur.style.transform = `translate(${cx}px,${cy}px)`; requestAnimationFrame(loop); })();
 
-    $$('.slab').forEach(sl => sl.addEventListener('pointermove', e => { const r = sl.getBoundingClientRect(); sl.style.setProperty('--sx', (e.clientX - r.left) + 'px'); sl.style.setProperty('--sy', (e.clientY - r.top) + 'px'); }, { passive: true }));
     // magnetic primary buttons
     $$('.btn--primary.btn--lg, .dock__ask, .band .btn--light').forEach(b => {
       const mx = G ? G.quickTo(b, 'x', { duration: .5, ease: 'power3.out' }) : null, my = G ? G.quickTo(b, 'y', { duration: .5, ease: 'power3.out' }) : null;
@@ -603,7 +610,7 @@
     $$('.sec-head .lede, .programs__head .lede, .cal__head .lede, .faq__side .lede, .visit__copy .lede').forEach(p => {
       const words = p.textContent.split(/\s+/).filter(Boolean);
       p.innerHTML = words.map(w => `<span class="fw">${esc(w)}</span>`).join(' ');
-      G.fromTo($$('.fw', p), { opacity: .18 }, { opacity: 1, stagger: .05, ease: 'none', scrollTrigger: { trigger: p, start: 'top 85%', end: 'top 50%', scrub: .6 } });
+      G.fromTo($$('.fw', p), { opacity: .3 }, { opacity: 1, stagger: .05, ease: 'none', scrollTrigger: { trigger: p, start: 'top 85%', end: 'top 50%', scrub: .6 } });
     });
     // cards rise in 3D, batched per row
     const rise = '.tile, .fac, .qa, .countdown__item, .calc__controls, .calc__result, .bars, .tt-table, .ibcc__card, .map, .tl, .change, .roster, .contact div';
@@ -615,8 +622,8 @@
     // hero parallax
     G.to('.hero__glow--a', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     G.to('.hero__copy', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    // slabs lift off the 3D floor: tilted back in perspective, flattening as they arrive
-    $$('.slab, .grades .band-in').forEach(el => {
+    // dark bands lift off the 3D floor: tilted back in perspective, flattening as they arrive
+    $$('.grades .band-in').forEach(el => {
       G.fromTo(el, { rotationX: 9, y: 70, scale: .965, transformPerspective: 1400 }, { rotationX: 0, y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'top 62%', scrub: .8 } });
     });
     // pinned horizontal programs (desktop)
