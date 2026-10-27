@@ -284,6 +284,12 @@
         <span class="act" role="cell"><button class="btn btn--outline btn--sm" data-book data-book-level="${ttLvl}" data-book-subject="${r[0]}"><span>Reserve</span></button></span></div>`).join('')
         : `<div class="tr" role="row"><span class="who" role="cell">No ${ttLvl} classes on these days. Try another day pair.</span></div>`);
   }
+  // phones: show six classes, fold the rest behind a button
+  const ttMore = document.createElement('button'); ttMore.type = 'button'; ttMore.className = 'btn btn--outline btn--sm tt-more';
+  tt.after(ttMore); let ttOpen = false;
+  const ttFold = () => { const n = $$('.tr:not(.tr--head)', tt).length; const fold = !ttOpen && n > 6; tt.classList.toggle('is-clipped', fold); ttMore.hidden = n <= 6; ttMore.innerHTML = fold ? `<span>Show all ${n} classes</span>` : '<span>Show fewer</span>'; };
+  ttMore.addEventListener('click', () => { ttOpen = !ttOpen; ttFold(); if (!ttOpen) tt.scrollIntoView({ block: 'start' }); if (window.ScrollTrigger) ScrollTrigger.refresh(); });
+  const _renderTT = renderTT; renderTT = function () { _renderTT(); ttOpen = false; ttFold(); };
   $$('button', ttSeg).forEach(b => b.addEventListener('click', () => { segSelect(ttSeg, b); ttLvl = b.dataset.tt; renderTT(); }));
   $$('.day').forEach(b => b.addEventListener('click', () => { $$('.day').forEach(x => { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', String(x === b)); }); ttDay = b.dataset.d; renderTT(); }));
   renderTT();
