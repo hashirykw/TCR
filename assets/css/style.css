@@ -1131,3 +1131,36 @@ body.is-locked .cursor.has-label i{transform:none;background:transparent;border-
   .nexlyr__txt b{font-size:.82rem}
   .nexlyr__btn{height:30px;padding:0 13px;font-size:12.5px}
 }
+/* ---------- booking sheet on phones: always-visible actions, fits the visible screen ---------- */
+@media (max-width:900px){
+  .modal__card{grid-template-rows:auto minmax(0,1fr)}
+  .modal__aside{padding-right:68px}
+  .modal__close{top:12px;right:12px;background:oklch(100% 0 0 / .16);color:var(--on-crimson);border:1px solid oklch(100% 0 0 / .28)}
+  .modal__close:hover{background:oklch(100% 0 0 / .26);color:var(--on-crimson)}
+  .modal__body{padding:24px 24px 0}
+  .modal__nav{position:sticky;bottom:0;z-index:2;margin:auto -24px 0;padding:12px 24px calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);box-shadow:0 -12px 24px -18px oklch(19% .03 265 / .45)}
+}
+@media (max-width:600px){
+  .modal__card{max-height:92svh;max-height:calc(100dvh - 10px)}
+  .modal__aside{padding:12px 64px 12px 18px}
+  .modal__aside img{width:34px}
+  .modal__body{padding:18px 18px 0}
+  .modal__nav{margin:auto -18px 0;padding:10px 18px calc(10px + env(safe-area-inset-bottom,0px))}
+  .modal__title{font-size:2.15rem;margin:2px 0 14px}
+  .step legend{font-size:15.5px;margin-bottom:12px}
+  .form-grid{gap:12px}
+  .field{gap:6px}
+  /* 16px stops iOS zooming into the form on focus */
+  .field input:not([type=range]),.select select,.bot__f input,.search input,.find__bar input,.palette__input input{font-size:16px}
+  .field input:not([type=range]){height:48px}
+  .choice>span{padding:14px 16px}
+  .choice b{font-size:1.45rem}
+  .summary{margin-top:14px;padding:12px 14px;font-size:13.5px}
+  .modal__hint{font-size:12.5px}
+}
+@media (max-width:600px){
+  .modal__nav{flex-wrap:wrap;row-gap:8px;column-gap:8px}
+  .modal__hint{flex-basis:100%;order:-1;margin:0;font-size:12px;line-height:1.3}
+  .modal__nav #bookNext{flex:1}
+  .modal__nav #bookBack{padding:0 14px;border:1px solid var(--line-2)}
+}
